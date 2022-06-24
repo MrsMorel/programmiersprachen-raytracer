@@ -9,9 +9,7 @@ Sphere::Sphere():
     Shape(),
     center_{0.0f, 0.0f, 0.0f},
     radius_{1.0f} {}
-
-
-Sphere::Sphere(glm::vec3 center, float radius):
+Sphere::Sphere(const glm::vec3 &center, float radius):
     Shape(),
     center_{center},
     radius_{std::abs(radius)} {}
@@ -23,4 +21,11 @@ float Sphere::area() const {
 float Sphere::volume() const {
     return  M_PI * 4/3 * (radius_*radius_*radius_);
 }
+
+Sphere::Sphere(const glm::vec3 &center, float radius, std::string name, const Color &color):
+    Shape(name, color),
+    center_{center},
+    radius_{std::abs(radius)} {}
+
+
 
