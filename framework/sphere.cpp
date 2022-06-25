@@ -27,5 +27,14 @@ Sphere::Sphere(const glm::vec3 &center, float radius, std::string name, const Co
     center_{center},
     radius_{std::abs(radius)} {}
 
+std::ostream &Sphere::print(std::ostream &os) const {
+    Shape::print(os);
+    os<< "center point, x: " << center_.x << "   y: " << center_.y << "  z: " << center_.z << "\n";
+    os<< "radius: " << radius_ << "\n";
+    os<< "area: " << (*this).area() << " square units" <<"\n";
+    os<< "volume: " << (*this).volume() <<" volume units" << "\n";
+    return os;
+}
+
 
 

@@ -14,7 +14,7 @@ Shape::Shape(std::string name, const Color &color) :
         name_{name}, color_{color} {}
 
 std::ostream &Shape::print(std::ostream &os) const {
-    return os<< "name: " << name_ << "      color: " << color_;
+    return os<< "name: " << name_ << "      color: " << color_ << "\n";
 }
 std::ostream& operator<<(std::ostream& os , Shape const& s )
 {

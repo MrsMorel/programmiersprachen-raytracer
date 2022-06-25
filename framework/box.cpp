@@ -32,5 +32,15 @@ Box::Box(const glm::vec3 &min, const glm::vec3 &max, std::string name, const Col
         min_{min},
         max_{max}{}
 
+std::ostream &Box::print(std::ostream &os) const {
+    Shape::print(os);
+    os<< "minimum point, x: " << min_.x << "   y: " << min_.y << "  z: " << min_.z << "\n";
+    os<< "maximum point, x: " << max_.x << "   y: " << max_.y << "  z: " << max_.z << "\n";
+    os<< "area: " << (*this).area() << " square units" <<"\n";
+    os<< "volume: " << (*this).volume() <<" volume units" << "\n";
+
+    return os;
+}
+
 
 

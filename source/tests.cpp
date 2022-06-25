@@ -29,6 +29,30 @@ TEST_CASE("Box area and volume", "box_area_volume") {
     REQUIRE(b2.area() == Approx(0.0f));
     REQUIRE(b2.volume() == Approx(0.0f));
 }
+//5.5
+TEST_CASE("print Box ", "box_print") {
+    Box b{};
+    std::cout << b;
+    Box b1{{1.0f,2.5f,-0.5f},{0.0f, 0.0f, 1.0f}};
+    std::cout << b1;
+    Box s2{{0.0f, 0.0f, 1.0f},{1.0f,2.5f,-0.5f}};
+    std::cout << s2;
+    Box b2{{0.0f, 0.0f, 0.0f},{0.0f, 0.0f, 0.0f}};
+    std::cout << b2;
+    Box b3{{0.0f, 0.0f, 0.0f},{0.0f, 0.0f, 0.0f}, "test box", {0,0,0}};
+    std::cout << b3;
+
+}
+TEST_CASE("Sphere print", "sphere_print") {
+    Sphere s{};
+    std::cout << s;
+    Sphere s1{{1.0f,2.5f,-0.5f},15.5f};
+    std::cout << s1;
+    Sphere s2{{1.0f,2.5f,-0.5f},-15.5f};
+    std::cout << s2;
+    Sphere s3{{1.0f,2.5f,-0.5f},-15.5f, "test sphere", {255,0,10}};
+    std::cout << s3;
+}
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

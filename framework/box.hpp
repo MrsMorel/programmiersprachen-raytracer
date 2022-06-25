@@ -16,9 +16,14 @@ public:
 
     float area() const override;
     float volume() const override;
+    std::ostream& print(std::ostream& os ) const override;
 
     glm::vec3 min_;
     glm::vec3 max_;
 
 };
 #endif //BOX_HPP
+//5.5
+/* override in Vererbung
+ * wenn weggelassen:
+ */
