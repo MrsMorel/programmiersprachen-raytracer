@@ -1,0 +1,479 @@
+commit c85012a0a25aaa9b21caf5f643852082116467fe
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Sun Jun 26 20:12:52 2022 +0200
+
+    add 5.7, 5.8, 5.9
+
+commit 40d3eb224a1375669f50fa84cf4a2f5d8048a54d
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Sun Jun 26 11:00:15 2022 +0200
+
+    add 5.6 intersect ray
+
+commit 5440c22ee0f5a9646c873186e22bf5c466014205
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Sat Jun 25 13:08:21 2022 +0200
+
+    add 5.5 print box and sphere
+
+commit a0cbfab399bb278f252e3ae674ad0fd8c15e85d0
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Fri Jun 24 15:01:34 2022 +0200
+
+    add 5.4 shape print, operator<<
+
+commit 9ebab301c51ef74dc91605e1c51c60ee581387c3
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Fri Jun 24 14:23:16 2022 +0200
+
+    add 5.3 name and color
+
+commit 94319b0e39402dbdfdf84ff042cedc7344c814a8
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Thu Jun 23 21:17:35 2022 +0200
+
+    add 5.2 box and sphere
+
+commit 4b0fd033525ad4c198e0a726c70d5e9db19b1574
+Author: MrsMorel <xxanne.b.tellexx@gmail.com>
+Date:   Wed Jun 15 16:20:42 2022 +0200
+
+    add 5.1 Shape Class
+
+commit dd694cc21ca18351ac0e4eea961781344cd522fa
+Author: Nyran <adrian.kreskowski@uni-weimar.de>
+Date:   Sun Jun 13 14:29:48 2021 +0200
+
+    change catch dependency
+
+commit 9d130ef8be20245b837351fc4d469d7276327fe2
+Author: Nyran <adrian.kreskowski@uni-weimar.de>
+Date:   Wed Jun 9 21:25:58 2021 +0200
+
+    check for compiler flags up to c++20
+
+commit abbb3d3be222b17b5f91a501185de7d7bc01e36e
+Author: Nyran <adrian.kreskowski@uni-weimar.de>
+Date:   Sun Aug 18 08:50:46 2019 +0200
+
+    remove threading in raytracer.cpp
+
+commit f96ad73d931c82a73dc0f4556826f14ed65cb35a
+Author: Adrian Kreskowski <adrian.kreskowski@uni-weimar.de>
+Date:   Mon Jun 24 15:55:01 2019 +0200
+
+    make color struct conformant to lecture (pure DTO)
+
+commit 4812975b52718ffe88dd560413f38087b5318dce
+Author: Nyran <adrian.kreskowski@uni-weimar.de>
+Date:   Thu Jun 7 19:11:38 2018 +0200
+
+    minor changes in structs
+
+commit 6f021b07b4460c90a1fcd3736e6851c07a198155
+Author: Nyran <adrian.kreskowski@uni-weimar.de>
+Date:   Thu Jun 7 19:11:18 2018 +0200
+
+    update License and Readme
+
+commit 0cfa4b9675abe188c8c8a81d3f9e6ac33b8e8482
+Author: Nyran <adrian.kreskowski@uni-weimar.de>
+Date:   Thu Jun 7 18:57:08 2018 +0200
+
+    remove inconsistency with style-guide
+
+commit b5f7a52c5f9729e6b723c7ffe1ea2f0698705fdf
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 12 15:35:32 2017 +0200
+
+    Change texture2D to texture
+
+commit 02739806de2ac7c504a8b743254d7cd962c794f0
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 13:28:21 2017 +0200
+
+    Change resolution to 800 by 600
+
+commit 100768bb88044bd9962ecbb02a93e3c652b6cb87
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 13:26:59 2017 +0200
+
+    Move quad rendering to show method
+
+commit 0eda26cbed0125c8734be8d4eb65a5f9045fba4c
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 13:13:01 2017 +0200
+
+    Update copyright
+
+commit 8cca16c8dd170f5b69c5c6a653c8971e562b5861
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 13:11:24 2017 +0200
+
+    Update copyright
+
+commit 9e72eb230754da4e998439976ff7bbc5b11b9b29
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 13:10:51 2017 +0200
+
+    Use gl texture
+
+commit 9fd4745775569c2b69f4dcc4cd0c1ded32760c80
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 11:00:13 2017 +0200
+
+    Update class window
+
+commit 27740aece698f18f02790d1766e5b8e2901d834e
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 10:28:18 2017 +0200
+
+    Update CMakeLists.txt
+
+commit cce342f42d8c0c6b31702e9749201d18c4f86fc7
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 10:27:03 2017 +0200
+
+    Remove old glfw
+
+commit 14946ec953cca840448bbe9b7f0aa2979a66a56f
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 10:24:07 2017 +0200
+
+    Add test file
+
+commit cbc95d8baa5dfc7599f727b75fb01bbdb7181941
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 10:23:57 2017 +0200
+
+    Update CMakeLists.txt
+
+commit d3a4a9ae011b8945a42b267bd517a74e1da433d1
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 10:23:41 2017 +0200
+
+    Add new glfw
+
+commit da76a436a0f7e65e9515649ab5bbb02b54bec346
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Thu Jun 8 10:23:23 2017 +0200
+
+    Remove tests
+
+commit 4192e85a1b04371537c45b6afce2b52b8ab40541
+Merge: 93e6ab4 2e36763
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 20 10:03:22 2016 +0200
+
+    Merge branch 'master' of github.com:vrsys/programmiersprachen-raytracer
+
+commit 93e6ab4668b9192f24551ff095183a96b10699de
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 20 10:02:57 2016 +0200
+
+    Add catch 1.5.6
+
+commit 2e36763fdb3367fc418c35e3f03c74e056cadc4c
+Merge: 77a8ee3 68de285
+Author: Andreas Bernstein <andreas.bernstein@gmail.com>
+Date:   Fri Jul 3 13:16:54 2015 +0200
+
+    Merge pull request #1 from heinrich-foto/patch-1
+    
+    build stopped. it doesn't use c++11
+
+commit 68de2854231770a2e2b5c550e9846474c3dfa813
+Author: Martin Heinrich <github@heinrich-foto.de>
+Date:   Fri Jul 3 13:12:51 2015 +0200
+
+    build stopped. it doesn't use c++11
+    
+    old log file.
+    https://s3.amazonaws.com/archive.travis-ci.org/jobs/69420069/log.txt
+    
+    now it build
+    https://s3.amazonaws.com/archive.travis-ci.org/jobs/69422104/log.txt
+
+commit 77a8ee36994fd092ad0358bf872af1e21f3b6756
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 15 10:39:30 2015 +0200
+
+    Use catch.hpp for testing
+
+commit a78057321a8ace6b11b45adc1683deacdc5597e0
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Jul 8 10:55:46 2014 +0200
+
+    Include <algorithm>.
+    
+    Visual studio was unable to find std::min and std::max.
+
+commit 796b6317d3fc05f42559b391c05661bad2a64ae6
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Jul 1 09:15:26 2014 +0200
+
+    Add Andre.
+
+commit 0b429967a2fad7c7e3d751c48744f28c010d52f5
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Jul 1 09:08:53 2014 +0200
+
+    Add copyright notice.
+
+commit eeeea9015f59ba977194eb42500ccff8edb5a1f9
+Author: Andreas Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 22:55:47 2014 +0200
+
+    Fix typo.
+
+commit d8fd70f9a652652903d68a6f68ec4dbfcc980757
+Author: Andreas Bernstein <andreas.bernstein@gmail.com>
+Date:   Mon Jun 30 22:22:30 2014 +0200
+
+    Use glfwGetFramebufferSize.
+
+commit 3fedae61e503052ad3ab0dcaf37330a210f85765
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 14:07:20 2014 +0200
+
+    Set window size to 600x600.
+
+commit 06bfe1c85ffa79ae6c9477a9d0bd63bc70403721
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 13:12:08 2014 +0200
+
+    Update first.
+
+commit 671c82cad8089a80b2be8d0cd70a3d0a127232b2
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 13:06:29 2014 +0200
+
+    Fix before_install entry.
+
+commit b007eae60dc22d7159c856cde302ff989402499b
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 13:02:17 2014 +0200
+
+    Install missing package.
+
+commit e2caae162080267a7029f3d36794237fb144268a
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 13:02:01 2014 +0200
+
+    Fix url.
+
+commit a91e0dd908aa7d0d21f9ced670426e92901714c0
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:58:04 2014 +0200
+
+    Add travis badge.
+
+commit 09ac0a6481945d86606feb1430fc109c25c5d5d7
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:54:56 2014 +0200
+
+    Add travis support.
+
+commit 36ccd615c4dd6fc5d18547ed36aaa2d878fa70d0
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:44:29 2014 +0200
+
+    Add glm documentation.
+
+commit 13227c28ad6fc3e823e920b67608e25bbfb0743b
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:43:40 2014 +0200
+
+    Add raytracer skeleton.
+
+commit 678f977b8241a4af32c50a5a05ec8b24e5f32c53
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:40:18 2014 +0200
+
+    Adapt window to new names in Color.
+
+commit fda3113dcf48d4606dcf9ef99e250fa644290585
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:39:35 2014 +0200
+
+    Add renderer skeleton.
+
+commit 67d706cb63e4435fff31ed2483c5158999d92d20
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:39:21 2014 +0200
+
+    Add ppm writer.
+
+commit b932fa076bacc109001ef1130319795ca0bf5338
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:39:08 2014 +0200
+
+    Add pixel type.
+
+commit 0f5a4767580f960a0815546b5f8eee2c816db28e
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 12:38:46 2014 +0200
+
+    Rename members.
+
+commit c34183a61fbd32e6fcfd01b7309d42e8c5ba41bb
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Mon Jun 30 10:17:59 2014 +0200
+
+    Add operators.
+    
+    operator+=
+    operator-=
+    operator+
+    operator-
+    operator<<
+
+commit 024cd4937174e8609d658941c9720b60a85069db
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Jun 17 11:21:40 2014 +0200
+
+    Disable tests.
+
+commit 01a20b82c2715962f1d5af3381221e167c469457
+Merge: ad2df12 97efdf3
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Jun 17 11:18:47 2014 +0200
+
+    Merge branch 'master' of github.com:vrsys/fensterchen
+
+commit ad2df12e9610c17ae034dd87e116b2c841ff9d6b
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Jun 17 11:18:25 2014 +0200
+
+    Add install instructions for ubuntu.
+
+commit 97efdf3f79ee61f11c18ced84835dec8ece74cb3
+Author: Sebastian Thiele <sebastian.thiele@uni-weimar.de>
+Date:   Tue May 13 11:02:05 2014 +0200
+
+    windows cmake howto
+       - howto add source files
+
+commit afd71cff574025d2256a492bb9797ef06d75e4bc
+Merge: 7cb5e50 9664a4d
+Author: Sebastian Thiele <sebastian.thiele@uni-weimar.de>
+Date:   Tue May 13 10:57:46 2014 +0200
+
+    Merge branch 'master' of https://github.com/vrsys/fensterchen
+
+commit 9664a4dc919abeda21100373aab44e695c92fa0d
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue May 13 09:55:15 2014 +0200
+
+    Fix test link error.
+
+commit da2e3950915dbe7ffa9fed27ca343061ca5acf20
+Author: Andreas Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Fri May 9 13:08:46 2014 +0200
+
+    Remove test.
+    
+    The TestUnitTest++ program throws an unhandled exception.
+
+commit 158664b1018ea4b12f98a382d084172d994104cf
+Author: Andreas Bernstein <andreas.bernstein@gmail.com>
+Date:   Wed May 7 14:42:28 2014 +0200
+
+    Link against framework and glfw.
+
+commit a730016391d8b4e09e267919bcd506fb5b4ca708
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 19:49:28 2014 +0200
+
+    Update README.md.
+
+commit c51f220fb4ef70bd755b4753b4196dc1c53a70c8
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 19:49:12 2014 +0200
+
+    Update license.
+
+commit 519175fe3f142158c58f04aa6a227d9282051a52
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 19:46:54 2014 +0200
+
+    Update example.
+
+commit 2768ab990f7ef3e6837a521d672975d1a6e3159c
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 19:46:37 2014 +0200
+
+    Overload draw methods.
+
+commit bb4d403812b5b83f47e8039d4ff8942612d47b76
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 18:57:46 2014 +0200
+
+    Add screenshot.
+
+commit 7cb5e50878eb95356697a68c6bc62439575be341
+Merge: be96d6a 0822ddf
+Author: Sebastian Thiele <sebastian.thiele@uni-weimar.de>
+Date:   Tue Apr 29 18:55:47 2014 +0200
+
+    Merge branch 'master' of https://github.com/vrsys/fensterchen
+
+commit be96d6a6037ab3573cc45d24a4e074e7f5733788
+Author: Sebastian Thiele <sebastian.thiele@uni-weimar.de>
+Date:   Tue Apr 29 18:55:32 2014 +0200
+
+    Update CMakeHowto Windows
+
+commit 0822ddf4ed30e2c3a5b0ca4e416fded7d890cd3d
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 18:25:30 2014 +0200
+
+    Use classic constructor call instead of uniform initialization.
+
+commit 753a58d4688a4e7acadfff0e37b4e0ef6722cbe5
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 18:22:57 2014 +0200
+
+    Use fensterchen.hpp instead of window.hpp.
+
+commit 6f0c09281bea5f5b305f735a5a371d3403e017cf
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 18:22:35 2014 +0200
+
+    Add fensterchen.hpp.
+
+commit b434d17db9818f5f5ef48efc69c9fab545f946aa
+Author: Sebastian Thiele <sebastian.thiele@uni-weimar.de>
+Date:   Tue Apr 29 18:13:19 2014 +0200
+
+    Added CMake HowTo for windows PDF
+
+commit f36fdfba85ea9f2a1d86af229f36365707a96b97
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 18:08:57 2014 +0200
+
+    Fix unittest++ include path.
+
+commit 1531ab474c58178714f15c9f89f9f874ce858f49
+Author: Sebastian Thiele <sebastian.thiele@uni-weimar.de>
+Date:   Tue Apr 29 16:01:36 2014 +0200
+
+    Delete Copy Binarys/FreeImage entrys from CMakeFile
+
+commit 52a132fc99ee100ed408d6927de1d0a1092e58fa
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 15:57:48 2014 +0200
+
+    Ignore build directories.
+
+commit a9772f9842d2010bcb9156ff2b51c3d391496358
+Author: Andreas-Christoph Bernstein <andreas.bernstein@uni-weimar.de>
+Date:   Tue Apr 29 15:55:40 2014 +0200
+
+    initial commit
+
+commit 8d0588fa2b161e84e63d9a2c97e40fc2198bfa44
+Author: Andreas Bernstein <andreas.bernstein@gmail.com>
+Date:   Tue Apr 29 06:54:42 2014 -0700
+
+    Initial commit
