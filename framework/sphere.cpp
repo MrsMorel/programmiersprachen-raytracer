@@ -36,5 +36,11 @@ std::ostream &Sphere::print(std::ostream &os) const {
     return os;
 }
 
+Hitpoint Sphere::intersect(const Ray &ray) const {
+    float t = 1.0f;
+    bool hit = glm::intersectRaySphere(ray.origin, glm::normalize(ray.direction), center_ , radius_*radius_, t);
+    return Hitpoint{hit, t, name_, color_, ray.origin + (t * ray.direction), glm::normalize(ray.direction)};
+}
+
 
 
