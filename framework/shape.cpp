@@ -8,6 +8,7 @@ Shape::Shape():
     color_{255,255,255}{}
 
 Shape::~Shape() {
+    std::cout << "Shape destructor " << name_ << "\n";
 }
 
 Shape::Shape(std::string name, const Color &color) :

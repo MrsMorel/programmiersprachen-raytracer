@@ -123,8 +123,72 @@ TEST_CASE ( "i n t e r s e c t _ r a y _ s p h e r e 1" , "[intersect_test1]" )
     REQUIRE(true == hit7.cut);
     REQUIRE(true == hit8.cut);
     REQUIRE(true == hit9.cut);
-
 }
+//5.7
+/*
+TEST_CASE("5.7", "5.7") {
+    Color red{255 , 0 , 0};
+    glm::vec3 position{0.0f , 0.0f , 0.0f };
+    std::shared_ptr<Sphere> s1 =
+            std::make_shared<Sphere>( position , 1.2f , red , " sphere0 " );
+    std::shared_ptr<Shape> s2 =
+            std::make_shared<Sphere>( position , 1.2f , red , " sphere1 " );
+    s1->print( std::cout );
+    s2->print(std::cout );
+}
+ */
+//Zeiger der Basisklasse kann immer Objekt der abgeleiteten Klasse referenzieren
+/*statischer Typ einer Variable: die Deklaration
+ * Variable mit Typ versehen, der zur Übersetzungszeit festgelegt wird
+ * erlaubt typabhängige Fehlererkennung zur Übersetzungszeit
+ * statische Variable von s1 ist Sphere (oder shared_ptr auf Sphere) und s2 ist Shape
+ * dynamischer Typ einer Variable:
+ *  welcher wert wird durch s1 und s2 referenziert? s1 und s2: make_shared Sphere
+ * Variablen sind nur namen, Typ ist mit Wert verbunden und nicht mit Variablen
+ *
+ * wann wird welche Art des Typs überprüft?
+ *
+ * was sind die dynamischen und die statischen Typen der Variablen s1 bzw. s2?
+ *  shared
+ */
+
+//5.8
+TEST_CASE("5.8", "5.8") {
+    std::cout << "\n";
+    std::cout << "5.8  " << "\n";
+    std::cout << "\n";
+
+    Color red{255 , 0 , 0};
+    glm::vec3 position{0.0f , 0.0f , 0.0f };
+    Sphere* s1 = new Sphere{ position , 1.2f , " sphere0 " , red };
+    Shape* s2 = new Sphere{ position , 1.2f  , " sphere1 " , red};
+    s1->print( std::cout );
+    s2->print( std::cout );
+    delete s1;
+    delete s2;
+    /* in welcher Reihenfolge werden Konstruktoren und Destruktoren aufgerufen?
+     *  mit virtual:
+     *      Konstruktor: s1 Shape, Sphere
+     *      Destruktor: s1 Sphere, Shape
+     *                  s2 Sphere, Shape
+     *  ohne:
+     *
+     *      Destruktor: s1 Sphere, Shape
+     *                  s2 Shape
+     *                  wenn kein Sphere Destruktor definiert : beides Shape
+     *      wieso vorsicht: können ggf. keine sekundären Strukturen und Ressourcen in der abgeleiteten Klasse freigegeben werden,
+     *      da destruktor evtl. nicht aufgerufen wird
+     */
+}
+/* 5.9
+ * Unterschied zwischen Klassenhierarchie vs. Objekthierarchie
+ *  Klassenhierarchie: Gruppierung von Objekten mit Basisklasse und abgeleiteten Klassen
+ *          abstrahierte Struktur mit Beziehungen
+ *  Objekthierarchie:
+ * Unterschied zwischen Klassendiagramm vs. Objektdiagramm
+ *  Klassendiagramm: Basisklassen, abgeleitete Klassen
+ *  Objektdiagramm: definierte konkrete Instanzen
+ */
 
 int main(int argc, char *argv[])
 {

@@ -42,5 +42,9 @@ Hitpoint Sphere::intersect(const Ray &ray) const {
     return Hitpoint{hit, t, name_, color_, ray.origin + (t * ray.direction), glm::normalize(ray.direction)};
 }
 
+Sphere::~Sphere() {
+    std::cout << "Sphere destruct " << name_ << "\n";
+}
+
 
 
