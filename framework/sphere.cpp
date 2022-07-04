@@ -4,6 +4,8 @@
 #include "sphere.hpp"
 #include <cmath>
 #include <glm/vec3.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 
 Sphere::Sphere():
     Shape(),
@@ -15,11 +17,11 @@ Sphere::Sphere(const glm::vec3 &center, float radius):
     radius_{std::abs(radius)} {}
 
 float Sphere::area() const {
-    return 4 * M_PI * (radius_ * radius_) ;
+    return 4 * glm::pi<float>() * (radius_ * radius_) ;
 }
 
 float Sphere::volume() const {
-    return  M_PI * 4/3 * (radius_*radius_*radius_);
+    return  glm::pi<float>() * 4/3 * (radius_*radius_*radius_);
 }
 
 Sphere::Sphere(const glm::vec3 &center, float radius, std::string name, const Color &color):
