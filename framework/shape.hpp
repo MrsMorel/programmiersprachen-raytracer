@@ -13,6 +13,13 @@ public:
     virtual float volume() const = 0;
     virtual std::ostream& print(std::ostream& os ) const;
 
+    void              name(std::string const& name);
+    std::string       name() const;
+    void           color(Color const& clr);
+    Color       color() const;
+
+//private
+private:
     std::string name_;
     Color color_;
 };

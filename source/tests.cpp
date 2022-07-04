@@ -30,6 +30,7 @@ TEST_CASE("Box area and volume", "box_area_volume") {
     REQUIRE(b2.volume() == Approx(0.0f));
 }
 //5.5
+//
 TEST_CASE("print Box ", "box_print") {
     Box b{};
     std::cout << b;
@@ -144,10 +145,11 @@ TEST_CASE("5.7", "5.7") {
  * statische Variable von s1 ist Sphere (oder shared_ptr auf Sphere) und s2 ist Shape
  * dynamischer Typ einer Variable:
  *  welcher wert wird durch s1 und s2 referenziert? s1 und s2: make_shared Sphere
- * Variablen sind nur namen, Typ ist mit Wert verbunden und nicht mit Variablen
+ * Variablen  *  Strukturdiagramm in UML zur grafischen Darstellung von Klassen, Schnittstellen und deren Beziehungen
+sind nur namen, Typ ist mit Wert verbunden und nicht mit Variablen
  *
  * wann wird welche Art des Typs überprüft?
- *
+ * bei aufrufen von methoden z.b.
  * was sind die dynamischen und die statischen Typen der Variablen s1 bzw. s2?
  *  shared
  */
@@ -182,12 +184,18 @@ TEST_CASE("5.8", "5.8") {
 }
 /* 5.9
  * Unterschied zwischen Klassenhierarchie vs. Objekthierarchie
- *  Klassenhierarchie: Gruppierung von Objekten mit Basisklasse und abgeleiteten Klassen
+ *  Klassenhierarchie:
+ *  Composite Pattern, Gruppierung von Klassen mit Basisklasse und abgeleiteten Klassen
  *          abstrahierte Struktur mit Beziehungen
+ *          statisch, nicht wirklich veränderbar
  *  Objekthierarchie:
+ *      Ordnung einer Menge an Objekten mit Beziehungen zwischen ihnen
+ *      dynamisch, da zur Laufzeit die Objekte verändert werden können, darstellung als graph möglich
  * Unterschied zwischen Klassendiagramm vs. Objektdiagramm
  *  Klassendiagramm: Basisklassen, abgeleitete Klassen
+ *      Strukturdiagramm in UML zur grafischen Darstellung von Klassen, Schnittstellen und deren Beziehungen
  *  Objektdiagramm: definierte konkrete Instanzen
+ *          stellt Instanzen von Klassen zur Ausführungszeit dar
  */
 
 int main(int argc, char *argv[])

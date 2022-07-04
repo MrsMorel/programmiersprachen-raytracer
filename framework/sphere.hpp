@@ -20,7 +20,13 @@ public:
     float area() const override;
     float volume() const override;
 
+    void           center(glm::vec3 const& ctr);
+    glm::vec3       center() const;
+    void           radius(float r);
+    float          radius() const;
 
+//private
+private:
     glm::vec3 center_;
     float radius_;
 

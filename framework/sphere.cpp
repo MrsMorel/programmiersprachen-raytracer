@@ -31,19 +31,35 @@ std::ostream &Sphere::print(std::ostream &os) const {
     Shape::print(os);
     os<< "center point, x: " << center_.x << "   y: " << center_.y << "  z: " << center_.z << "\n";
     os<< "radius: " << radius_ << "\n";
-    os<< "area: " << (*this).area() << " square units" <<"\n";
-    os<< "volume: " << (*this).volume() <<" volume units" << "\n";
+    os<< "area: " << area() << " square units" <<"\n";
+    os<< "volume: " << volume() <<" volume units" << "\n";
     return os;
 }
 
 Hitpoint Sphere::intersect(const Ray &ray) const {
     float t = 1.0f;
     bool hit = glm::intersectRaySphere(ray.origin, glm::normalize(ray.direction), center_ , radius_*radius_, t);
-    return Hitpoint{hit, t, name_, color_, ray.origin + (t * ray.direction), glm::normalize(ray.direction)};
+    return Hitpoint{hit, t, name(), color(), ray.origin + (t * ray.direction), glm::normalize(ray.direction)};
 }
 
 Sphere::~Sphere() {
-    std::cout << "Sphere destruct " << name_ << "\n";
+    std::cout << "Sphere destruct " << name() << "\n";
+}
+
+void Sphere::center(const glm::vec3 &ctr) {
+    center_ = ctr;
+}
+
+glm::vec3 Sphere::center() const {
+    return center_;
+}
+
+void Sphere::radius(float r) {
+    radius_ = r;
+}
+
+float Sphere::radius() const {
+    return radius_;
 }
 
 
