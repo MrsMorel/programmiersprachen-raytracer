@@ -3,9 +3,11 @@
 //
 #include "shape.hpp"
 
+#include <memory>
+
 Shape::Shape():
     name_{"default"},
-    material_{std::shared_ptr<Material> (new Material{})}
+    material_{std::make_shared<Material> (Material{})}
     {}
 
 

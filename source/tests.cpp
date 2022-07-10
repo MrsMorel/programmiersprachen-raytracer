@@ -59,6 +59,8 @@ TEST_CASE("Sphere print", "sphere_print") {
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
 #include "ray.hpp"
+#include "scene.cpp"
+
 TEST_CASE ( "i n t e r s e c t _ r a y _ s p h e r e " , "[intersect]" )
 {
 // Ray
@@ -221,6 +223,13 @@ TEST_CASE("Box intersection") {
 TEST_CASE("material", "print") {
     Material m{};
     std::cout << m;
+}
+TEST_CASE("scene", "sdfparser") {
+    Scene s;
+    s = sdfParser("../test.sdf");
+    /*for (const auto& i : s.material_map) {
+        std::cout << i.first << " " << i.second << "\n";
+    }*/
 }
 int main(int argc, char *argv[])
 {

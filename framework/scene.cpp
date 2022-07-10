@@ -1,19 +1,16 @@
 //
 // Created by annetelle on 10.07.22.
 //
-#include <iostream>
-#include <sstream>
-#include <string>
-#include <fstream>
-#include "material.cpp"
-
-int main(int argc, char** argv){
-    std::string file_path = "./test.sdf";
-    if(argc > 1){
-        file_path = argv[1];
-    }
+#include "scene.hpp"
+Scene sdfParser(std::string const& file_path){
+    //std::string file_path = "./test.sdf";
     std::ifstream  sdf_filestream(file_path, std::ios::in);
+    /* if (sdf_filestream.is_open()){
+         std::cout << "could not open file" << std::endl;
+         exit(-1);
+     }*/
     std::string line_buffer;
+    Scene sc;
     while (std::getline(sdf_filestream,line_buffer)){
         std::istringstream iss(line_buffer);
         std::string keyword = " ";
@@ -36,10 +33,11 @@ int main(int argc, char** argv){
                 for (unsigned int channel_idx = 0; channel_idx < 3 ; ++channel_idx) {
                     iss >> ka[channel_idx];
                 }*/
-               // sc.material_map.insert({name, std::make_shared<Material>(material)});
+                sc.material_map.insert({name, std::make_shared<Material>(material)});
                 std::cout << "successfully created material" << material << std::endl;
             }
         }
     }
     sdf_filestream.close();
+    return sc;
 }
