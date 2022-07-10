@@ -13,7 +13,7 @@ public:
     Sphere();
     ~Sphere();
     Sphere(glm::vec3 const& center, float radius);
-    Sphere(glm::vec3 const& center, float radius, std::string name, Color const& color);
+    Sphere(glm::vec3 const& center, float radius, std::string name, std::shared_ptr<Material> material);
     std::ostream& print(std::ostream& os ) const override;
     Hitpoint intersect(Ray const& ray) const;
 

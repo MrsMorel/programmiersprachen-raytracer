@@ -5,17 +5,21 @@
 
 Shape::Shape():
     name_{"default"},
-    color_{255,255,255}{}
+    material_{std::shared_ptr<Material> (new Material{})}
+    {}
+
 
 Shape::~Shape() {
-    std::cout << "Shape destructor " << name_ << "\n";
+    //std::cout << "Shape destructor " << name_ << "\n";
 }
 
-Shape::Shape(std::string name, const Color &color) :
-        name_{name}, color_{color} {}
+Shape::Shape(std::string name, std::shared_ptr<Material> material) :
+        name_{name}, material_{std::move(material)} {}
 
 std::ostream &Shape::print(std::ostream &os) const {
-    return os<< "name: " << name_ << "      color: " << color_ << "\n";
+    std::cout << "\n";
+    os<< "name: " << name_ << "     material: " << material_->name_<< "\n";
+    return os;
 }
 
 
@@ -27,12 +31,12 @@ std::string Shape::name() const {
     return name_;
 }
 
-void Shape::color(const Color &clr) {
-    color_ = clr;
+void Shape::material(const std::shared_ptr<Material> &mat) {
+    material_ = mat;
 }
 
-Color Shape::color() const {
-    return color_;
+std::shared_ptr<Material> Shape::material() const {
+    return material_;
 }
 
 std::ostream& operator<<(std::ostream& os , Shape const& s )

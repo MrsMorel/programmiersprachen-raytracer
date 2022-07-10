@@ -9,10 +9,15 @@
 #include "color.hpp"
 
 struct Material {
-    std::string name;
-    Color ka{0.,0,0};
+    std::string name_;
+    Color ka{0,0,0};
     Color kd{0,0,0};
     Color ks{0,0,0};
-    float m = 1.0f; //Spekularreflexionsexponente: Oberfläche rau oder glatt
+    float m_ = 1.0f; //Spekularreflexionsexponente: Oberfläche rau oder glatt
+
+    std::ostream& print(std::ostream& os ) const;
+
+
 };
 #endif //MATERIAL_HPP
+std::ostream& operator<<( std::ostream& os, Material const& material);

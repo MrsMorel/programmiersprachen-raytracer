@@ -2,6 +2,7 @@
 #include <catch.hpp>
 #include "sphere.cpp"
 #include "box.cpp"
+#include "material.cpp"
 #include "shape.hpp"
 
 TEST_CASE("Sphere area and volume", "sphere_area_volume") {
@@ -40,7 +41,7 @@ TEST_CASE("print Box ", "box_print") {
     std::cout << s2;
     Box b2{{0.0f, 0.0f, 0.0f},{0.0f, 0.0f, 0.0f}};
     std::cout << b2;
-    Box b3{{0.0f, 0.0f, 0.0f},{0.0f, 0.0f, 0.0f}, "test box", {0,0,0}};
+    Box b3{{0.0f, 0.0f, 0.0f},{0.0f, 0.0f, 0.0f}};
     std::cout << b3;
 
 }
@@ -51,7 +52,7 @@ TEST_CASE("Sphere print", "sphere_print") {
     std::cout << s1;
     Sphere s2{{1.0f,2.5f,-0.5f},-15.5f};
     std::cout << s2;
-    Sphere s3{{1.0f,2.5f,-0.5f},-15.5f, "test sphere", {255,0,10}};
+    Sphere s3{{1.0f,2.5f,-0.5f},-15.5f};
     std::cout << s3;
 }
 //5.6
@@ -100,7 +101,7 @@ TEST_CASE ( "i n t e r s e c t _ r a y _ s p h e r e 1" , "[intersect_test1]" )
 
     Sphere s{};
     Ray r{ray_origin,ray_direction};
-    Sphere test{sphere_center,sphere_radius, "test", {0,0,0}};
+    Sphere test{sphere_center,sphere_radius};
     Hitpoint hit = test.intersect(r);
     Hitpoint hit2 = s.intersect(r);
     REQUIRE(true == hit.cut);
@@ -115,7 +116,7 @@ TEST_CASE ( "i n t e r s e c t _ r a y _ s p h e r e 1" , "[intersect_test1]" )
     REQUIRE(true == hit5.cut);
     Sphere s2{{1.0f,2.5f,-0.5f},-15.5f};
     Ray r3{{4.0f,-5.0f,0.0f},{10.0f,0.0f,-10.0f}};
-    Sphere s3{{1.0f,2.5f,-0.5f},-15.5f, "test sphere", {255,0,10}};
+    Sphere s3{{1.0f,2.5f,-0.5f},-15.5f};
     Hitpoint hit6 = s.intersect(r3);
     Hitpoint hit7 = s1.intersect(r3);
     Hitpoint hit8 = s2.intersect(r3);
@@ -155,6 +156,7 @@ sind nur namen, Typ ist mit Wert verbunden und nicht mit Variablen
  */
 
 //5.8
+/*
 TEST_CASE("5.8", "5.8") {
     std::cout << "\n";
     std::cout << "5.8  " << "\n";
@@ -168,7 +170,7 @@ TEST_CASE("5.8", "5.8") {
     s2->print( std::cout );
     delete s1;
     delete s2;
-    /* in welcher Reihenfolge werden Konstruktoren und Destruktoren aufgerufen?
+     in welcher Reihenfolge werden Konstruktoren und Destruktoren aufgerufen?
      *  mit virtual:
      *      Konstruktor: s1 Shape, Sphere
      *      Destruktor: s1 Sphere, Shape
@@ -180,8 +182,9 @@ TEST_CASE("5.8", "5.8") {
      *                  wenn kein Sphere Destruktor definiert : beides Shape
      *      wieso vorsicht: können ggf. keine sekundären Strukturen und Ressourcen in der abgeleiteten Klasse freigegeben werden,
      *      da destruktor evtl. nicht aufgerufen wird
-     */
+
 }
+*/
 /* 5.9
  * Unterschied zwischen Klassenhierarchie vs. Objekthierarchie
  *  Klassenhierarchie:
@@ -197,7 +200,10 @@ TEST_CASE("5.8", "5.8") {
  *  Objektdiagramm: definierte konkrete Instanzen
  *          stellt Instanzen von Klassen zur Ausführungszeit dar
  */
-
+TEST_CASE("material", "print") {
+    Material m{};
+    std::cout << m;
+}
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

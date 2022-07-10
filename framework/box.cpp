@@ -27,8 +27,10 @@ float Box::volume() const {
     return std::abs((max_.x - min_.x)*(max_.z - min_.z)*(max_.y - min_.y));
 }
 
-Box::Box(const glm::vec3 &min, const glm::vec3 &max, std::string name, const Color &color):
-        Shape(name, color),
+
+
+Box::Box(const glm::vec3 &min, const glm::vec3 &max, std::string name, std::shared_ptr<Material> material):
+        Shape(name, material),
         min_{min},
         max_{max}{}
 
@@ -59,6 +61,8 @@ void Box::max(const glm::vec3 &max) {
 glm::vec3 Box::max() const {
     return max_;
 }
+
+
 
 
 

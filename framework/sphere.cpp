@@ -24,8 +24,8 @@ float Sphere::volume() const {
     return  glm::pi<float>() * 4/3 * (radius_*radius_*radius_);
 }
 
-Sphere::Sphere(const glm::vec3 &center, float radius, std::string name, const Color &color):
-    Shape(name, color),
+Sphere::Sphere(const glm::vec3 &center, float radius, std::string name, std::shared_ptr<Material> material):
+    Shape(name, material),
     center_{center},
     radius_{std::abs(radius)} {}
 
@@ -41,11 +41,11 @@ std::ostream &Sphere::print(std::ostream &os) const {
 Hitpoint Sphere::intersect(const Ray &ray) const {
     float t = 1.0f;
     bool hit = glm::intersectRaySphere(ray.origin, glm::normalize(ray.direction), center_ , radius_*radius_, t);
-    return Hitpoint{hit, t, name(), color(), ray.origin + (t * ray.direction), glm::normalize(ray.direction)};
+    return Hitpoint{hit, t, name(), material(), ray.origin + (t * ray.direction), glm::normalize(ray.direction)};
 }
 
 Sphere::~Sphere() {
-    std::cout << "Sphere destruct " << name() << "\n";
+   // std::cout << "Sphere destruct " << name() << "\n";
 }
 
 void Sphere::center(const glm::vec3 &ctr) {
@@ -63,6 +63,7 @@ void Sphere::radius(float r) {
 float Sphere::radius() const {
     return radius_;
 }
+
 
 
 

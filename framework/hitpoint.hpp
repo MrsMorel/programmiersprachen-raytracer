@@ -14,7 +14,7 @@ struct Hitpoint{
     bool cut = false;
     float t = 0.0f;
     std::string name = "  ";
-    Color color{255,255,255};
+    std::shared_ptr<Material> material{};
     glm::vec3 intersection{0.0f,0.0f,0.0f};
     glm::vec3 direction{1.0f,1.0f,1.0f};
 };
