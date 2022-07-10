@@ -22,6 +22,9 @@ public:
     glm::vec3       min() const;
     void           max(glm::vec3 const& max);
     glm::vec3       max() const;
+
+    Hitpoint intersect(Ray const& ray) const override;
+
 //private
 private:
     glm::vec3 min_;

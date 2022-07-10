@@ -200,6 +200,24 @@ TEST_CASE("5.8", "5.8") {
  *  Objektdiagramm: definierte konkrete Instanzen
  *          stellt Instanzen von Klassen zur Ausführungszeit dar
  */
+
+//6.3
+TEST_CASE("Box intersection") {
+    Box b1{ {0.0f, 0.0f, 1.0f},{1.0f,3.0f,4.0f} };
+    Ray r1{ {0.0f,0.0f,0.0f},{1.0f,2.0f,1.0f} };
+    Ray r2{ {0.0f,0.0f,0.0f},{-1.0f,-2.0f,-1.0f} };
+    Hitpoint p1 = b1.intersect(r1);
+    Hitpoint p2 = b1.intersect(r2);
+    REQUIRE(true == p1.cut);
+    REQUIRE(false == p2.cut);
+    Ray r3{ {0.0f,0.0f,0.0f},{0.0f,-1.3f,-1.0f} };
+    Ray r4{ {0.0f,0.0f,0.0f},{2.0f,1.0f,0.0f} };
+    Hitpoint p3 = b1.intersect(r3);
+    Hitpoint p4 = b1.intersect(r4);
+    REQUIRE(false == p3.cut);
+    REQUIRE(false == p4.cut);
+}
+
 TEST_CASE("material", "print") {
     Material m{};
     std::cout << m;

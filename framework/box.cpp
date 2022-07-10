@@ -4,6 +4,7 @@
 #include "box.hpp"
 #include "shape.hpp"
 #include <cmath>
+#include <vector>
 
 
 Box::Box():
@@ -60,6 +61,35 @@ void Box::max(const glm::vec3 &max) {
 
 glm::vec3 Box::max() const {
     return max_;
+}
+
+Hitpoint Box::intersect(Ray const& ray) const {
+    glm::vec3 normalized_direction = glm::normalize(ray.direction);
+    float t1 = (min_.x - ray.origin.x) / normalized_direction.x;
+    float t2 = (min_.y - ray.origin.y) / normalized_direction.y;
+    float t3 = (min_.z - ray.origin.z) / normalized_direction.z;
+    float t4 = (max_.x - ray.origin.x) / normalized_direction.x;
+    float t5 = (max_.y - ray.origin.y) / normalized_direction.y;
+    float t6 = (max_.z - ray.origin.z) / normalized_direction.z;
+
+    std::vector<float> distances{ t1, t2, t3, t4, t5, t6 };
+    std::sort(distances.begin(), distances.end());
+    for (float i : distances) {
+        if (i < 0)
+        {
+            continue;
+        }
+        else {
+            glm::vec3 p = ray.origin + i * normalized_direction;
+            if (p.y <= max_.y && p.y >= min_.y && 
+                p.z <= max_.z && p.z >= min_.z &&
+                p.x <= max_.x && p.x >= min_.x) {
+                
+                return Hitpoint{true, i, name(), color(), p, normalized_direction};
+            }
+        }
+    }
+    return Hitpoint{};
 }
 
 
