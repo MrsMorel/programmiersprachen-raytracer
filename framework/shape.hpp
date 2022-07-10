@@ -5,6 +5,9 @@
 #include <memory>
 #include "color.hpp"
 #include "material.hpp"
+#include "ray.hpp"
+#include "hitpoint.hpp"
+#include <algorithm>
 
 class Shape {
 public:
@@ -20,7 +23,8 @@ public:
     void           material(std::shared_ptr<Material> const& mat);
     std::shared_ptr<Material>      material() const;
 
-//private
+    virtual Hitpoint intersect(Ray const& ray) const = 0;
+    //private
 private:
     std::string name_;
     std::shared_ptr<Material> material_;

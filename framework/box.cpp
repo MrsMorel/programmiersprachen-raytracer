@@ -7,6 +7,7 @@
 #include <vector>
 
 
+
 Box::Box():
     Shape(),
     min_ {0.0f , 0.0f, 0.0f},
@@ -85,7 +86,7 @@ Hitpoint Box::intersect(Ray const& ray) const {
                 p.z <= max_.z && p.z >= min_.z &&
                 p.x <= max_.x && p.x >= min_.x) {
                 
-                return Hitpoint{true, i, name(), color(), p, normalized_direction};
+                return Hitpoint{true, i, name(), material(), p, normalized_direction};
             }
         }
     }
