@@ -3,9 +3,7 @@
 //
 #include "sphere.hpp"
 #include <cmath>
-#include <glm/vec3.hpp>
-#include <glm/glm.hpp>
-#include <glm/gtc/constants.hpp>
+
 
 Sphere::Sphere():
     Shape(),

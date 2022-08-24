@@ -9,6 +9,13 @@
 #include "hitpoint.hpp"
 #include <algorithm>
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/vec3.hpp>
+#include <glm/gtc/constants.hpp>
+#include <glm/gtx/intersect.hpp>
+
 class Shape {
 public:
     Shape();

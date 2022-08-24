@@ -19,6 +19,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
 
 void Renderer::render()
 {
+    //render checker pattern
   std::size_t const checker_pattern_size = 20;
 
   for (unsigned y = 0; y < height_; ++y) {
