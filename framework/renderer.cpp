@@ -52,3 +52,4 @@ void Renderer::write(Pixel const& p)
 
   ppm_.write(p);
 }
+

@@ -22,11 +22,21 @@ public:
   Renderer(unsigned w, unsigned h, std::string const& file);
 
   void render();
+
   void write(Pixel const& p);
 
   inline std::vector<Color> const& color_buffer() const
   {
     return color_buffer_;
+  }
+  inline unsigned get_width() const {
+        return width_;
+  }
+  inline unsigned get_height() const {
+        return height_;
+  }
+  inline std::string get_filename() const {
+        return filename_;
   }
 
 private:

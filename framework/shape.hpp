@@ -11,6 +11,7 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
+#define GLM_FORCE_RADIANS
 #include <glm/gtx/transform.hpp>
 #include <glm/vec3.hpp>
 #include <glm/gtc/constants.hpp>
