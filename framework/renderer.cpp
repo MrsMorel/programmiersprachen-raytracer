@@ -53,3 +53,41 @@ void Renderer::write(Pixel const& p)
   ppm_.write(p);
 }
 
+void Renderer::render(const Scene &s) {
+    for (unsigned y = 0; y < height_; ++y) {
+        for (unsigned x = 0; x < width_; ++x) {
+            Pixel p(x,y);
+           // Ray ray{s.camera.position,};
+            // TODO render fertigstellen
+            // p.color = trace(ray, s);
+            write(p);
+
+        }
+    }
+    ppm_.save(filename_);
+}
+
+Color Renderer::trace(const Ray &ray, const Scene &s) {
+    std::shared_ptr<Shape> closest_o;
+    Hitpoint closest_t;
+    for (const auto& element : s.shape_vector) {
+        auto t = element->intersect(ray);
+       /* if (t.cut){
+            std::cout << "hit" << "\n";
+        }*/
+        if (t.t < closest_t.t){
+            closest_t = t;
+            closest_o = element;
+        }
+    }
+    if (closest_o != nullptr){
+        return shade(closest_o, ray, closest_t);
+    }
+}
+//TODO shade implementieren
+Color Renderer::shade(std::shared_ptr<Shape> sharedPtr, const Ray &ray, Hitpoint hitpoint) {
+
+    return Color();
+}
+
+

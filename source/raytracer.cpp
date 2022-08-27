@@ -1,10 +1,10 @@
 #include "window.hpp"
-
 #include <GLFW/glfw3.h>
 #include <thread>
 #include <utility>
 #include <cmath>
 #include "renderer.hpp"
+#include "scene.hpp"
 //#include "scene.hpp"
 
 //now single threaded again
@@ -13,13 +13,18 @@ int main(int argc, char* argv[])
   unsigned const image_width = 800;
   unsigned const image_height = 600;
   std::string const filename = "./checkerboard.ppm";
-  /*Scene s = sdfParser("../../source/example1.sdf");
-    for (const auto& element : s.material_map) {
-        std::cout << element.first << "  aaaa " << "\n";
-    }*/
+
+  Scene s = sdfParser("../example1.sdf");
+  std::cout << s.material_map.empty() << "\n";
+    sdfParser("../example1.sdf");
+  std::cout << s.material_map.begin()->second << "\n";
+  for (const auto& element : s.material_map) {
+        std::cout << element.first << "\n";
+    }
+
   Renderer renderer{image_width, image_height, filename};
     std::cout << "test " << "\n";
-  //renderer.render();
+  renderer.render();
 
   Window window{{image_width, image_height}};
 

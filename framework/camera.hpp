@@ -13,5 +13,8 @@ struct Camera{
     glm::vec3 position = {0.0f , 0.0f , 0.0f };
     float fov_x; //horizontaler öffnungswinkel, blickt in richtung der negaticen z-achse
     //float resolution;
+    Ray c_ray(int x, int y, unsigned width, unsigned height);
 };
+
+
 #endif //CAMERA_HPP
