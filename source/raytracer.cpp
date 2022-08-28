@@ -14,16 +14,15 @@ int main(int argc, char* argv[])
   unsigned const image_height = 600;
   std::string const filename = "./checkerboard.ppm";
 
-  Scene s = sdfParser("../example1.sdf");
-  std::cout << s.material_map.empty() << "\n";
-    sdfParser("../example1.sdf");
-  std::cout << s.material_map.begin()->second << "\n";
+  Scene s = sdfParser("./example1.sdf");
+  //std::cout << s.material_map.empty() << "\n";
+  //std::cout << s.material_map.begin()->second << "\n";
+  //material test
   for (const auto& element : s.material_map) {
         std::cout << element.first << "\n";
     }
 
   Renderer renderer{image_width, image_height, filename};
-    std::cout << "test " << "\n";
   renderer.render();
 
   Window window{{image_width, image_height}};

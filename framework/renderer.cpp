@@ -53,7 +53,7 @@ void Renderer::write(Pixel const& p)
   ppm_.write(p);
 }
 
-void Renderer::render(const Scene &s) {
+void Renderer::render(const Scene &s, const Camera &c) {
     for (unsigned y = 0; y < height_; ++y) {
         for (unsigned x = 0; x < width_; ++x) {
             Pixel p(x,y);
@@ -89,5 +89,8 @@ Color Renderer::shade(std::shared_ptr<Shape> sharedPtr, const Ray &ray, Hitpoint
 
     return Color();
 }
+
+
+
 
 

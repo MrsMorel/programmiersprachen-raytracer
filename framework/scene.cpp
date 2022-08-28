@@ -97,6 +97,7 @@ Scene sdfParser(std::string const& file_path){
                 iss >> fov_x;
                 sc.camera.name = cam_name;
                 sc.camera.fov_x = fov_x;
+                std::cout << "successfully created camera " << sc.camera.name <<std::endl;
             }
         }
         if ("render" == keyword){
@@ -109,6 +110,7 @@ Scene sdfParser(std::string const& file_path){
             sc.rend.filename = filepath;
             sc.rend.width = x_res;
             sc.rend.height = y_res;
+            std::cout << "successfully created render "<< sc.rend.camera_name << std::endl;
             //erzeugt bild der szene und legt datei ab mit auflösung
         }
     }
