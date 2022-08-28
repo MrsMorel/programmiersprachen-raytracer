@@ -7,6 +7,7 @@
 
 #include <string>
 #include <glm/glm.hpp>
+#include "ray.hpp"
 
 struct Camera{
     std::string name = "default camera";

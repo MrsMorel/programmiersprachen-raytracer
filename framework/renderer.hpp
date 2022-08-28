@@ -23,7 +23,7 @@ public:
   Renderer(unsigned w, unsigned h, std::string const& file);
 
   void render();
-  void render(Scene const& s);
+  void render(Scene const& s, Camera const& c);
   void write(Pixel const& p);
   Color trace(Ray const& ray, Scene const& s);
 
@@ -48,7 +48,8 @@ private:
   std::string filename_;
   PpmWriter ppm_;
 
-    Color shade(std::shared_ptr<Shape> sharedPtr, const Ray &ray, Hitpoint hitpoint);
+  Color shade(const Scene &scene, std::shared_ptr<Shape> const& sharedPtr, const Ray &ray, Hitpoint hitpoint);
+  Color calc_diffuse(const Scene &s, std::shared_ptr<Shape> const& sharedPtr,const Hitpoint& hitpoint);
 };
 
 #endif // #ifndef BUW_RENDERER_HPP

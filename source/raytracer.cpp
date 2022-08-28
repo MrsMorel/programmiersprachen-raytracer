@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     }
 
   Renderer renderer{image_width, image_height, filename};
-  renderer.render();
+  renderer.render(s, s.camera);
 
   Window window{{image_width, image_height}};
 

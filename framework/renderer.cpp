@@ -57,38 +57,69 @@ void Renderer::render(const Scene &s, const Camera &c) {
     for (unsigned y = 0; y < height_; ++y) {
         for (unsigned x = 0; x < width_; ++x) {
             Pixel p(x,y);
-           // Ray ray{s.camera.position,};
+            float dist = (width_/2.0f) /std::tan(c.fov_x * M_PI / 360.0f);
+            glm::vec3 direction = {x-(width_ / 2.0f), y - (height_ / 2.0f), -dist};
+            Ray ray{s.camera.position, glm::normalize(direction)};
             // TODO render fertigstellen
-            // p.color = trace(ray, s);
+            
+            p.color = trace(ray, s);
             write(p);
 
         }
     }
     ppm_.save(filename_);
 }
+//todo durch kamera generierten strahl mit scene schneiden, hitpoint über lichtquellen beleuchten
 
 Color Renderer::trace(const Ray &ray, const Scene &s) {
     std::shared_ptr<Shape> closest_o;
     Hitpoint closest_t;
+    Color background_color{0.0f,0.0f,0.0f};
     for (const auto& element : s.shape_vector) {
-        auto t = element->intersect(ray);
-       /* if (t.cut){
+        auto hit = element->intersect(ray);
+        float distance = glm::distance(s.camera.position, hit.intersection);
+       /* if (hit.cut){
             std::cout << "hit" << "\n";
         }*/
-        if (t.t < closest_t.t){
-            closest_t = t;
+        if (hit.t < closest_t.t){
+            closest_t = hit;
             closest_o = element;
         }
     }
     if (closest_o != nullptr){
-        return shade(closest_o, ray, closest_t);
+        return shade(s, closest_o, ray, closest_t);
+    } else {
+        return background_color;
     }
 }
 //TODO shade implementieren
-Color Renderer::shade(std::shared_ptr<Shape> sharedPtr, const Ray &ray, Hitpoint hitpoint) {
 
+Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, const Ray &ray, Hitpoint hitpoint) {
+    //point x = r(t) , t=distance into ray equation
+    //evaluate illumination equation
+    //generate new rays if reflection, refraction or shadows
+    //ambient
+    Color ka = sharedPtr->material()->ka;
+    Color ambient = s.ambient.color;
+    Color calc_ambient = ka * s.ambient.color;
+    Color shading = calc_ambient;
+    return shading;}
+/*
+Color Renderer::calc_diffuse(const Scene &s, const std::shared_ptr<Shape> &sharedPtr, const Hitpoint& hitpoint) {
+    //diffuse
+    Color calc_diffuse;
+    Hitpoint hit_help;
+    for (auto light : s.light_vector) {
+        bool block = false;
+        Ray ray_help{glm::normalize(hitpoint.intersection), glm::normalize(light->pos - hitpoint.intersection)};
+        for (auto shape: s.shape_vector) {
+            hit_help = shape->intersect(ray_help);
+            //punktlicht
+        }
+    }
     return Color();
-}
+}*/
+
 
 
 

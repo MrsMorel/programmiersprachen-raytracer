@@ -51,6 +51,21 @@ struct Color
     return tmp;
   }
 
+    Color& operator*=(Color const& other)
+    {
+        r *= other.r;
+        g *= other.g;
+        b *= other.b;
+        return *this;
+    }
+    Color& operator*(Color const& other)
+    {
+        r *= other.r;
+        g *= other.g;
+        b *= other.b;
+        return *this;
+    }
+
   float r;
   float g;
   float b;
