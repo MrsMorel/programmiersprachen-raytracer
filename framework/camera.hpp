@@ -13,7 +13,14 @@ class Camera{
 public:
     Camera();
     Camera(std::string const& name, float fov_x);
-    Ray c_ray(int x, int y, unsigned width, unsigned height) const;
+    Ray c_ray(unsigned x, unsigned y, unsigned width, unsigned height) const;
+
+    inline std::string get_name() const {
+        return name_;
+    }
+    inline float get_fov_x() const {
+        return fov_x;
+    }
 
 private:
     std::string name_;
@@ -21,8 +28,6 @@ private:
     float fov_x; //horizontaler öffnungswinkel, blickt in richtung der negativen z-achse
     glm::vec3 eye_;
     glm::vec3 direction_;
-    //float resolution;
-    //glm::vec3 direction = {0.0f,0.0f,-1.0f}; //negativer z achse
 };
 
 

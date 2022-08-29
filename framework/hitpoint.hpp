@@ -15,9 +15,10 @@ struct Hitpoint{
     float t = 0.0f;
     std::string name = "  ";
     std::shared_ptr<Material> material{};
-    glm::vec3 intersection{0.0f,0.0f,0.0f};
-    glm::vec3 direction{1.0f,1.0f,1.0f};
-    glm::vec3 intersect_pt{0.0f,0.0f,0.0f};
+    //glm::vec3 intersection{0.0f,0.0f,0.0f};
+
+    glm::vec3 direction{0.0f,0.0f,0.0f};
+    glm::vec3 point{0.0f,0.0f,0.0f};
     glm::vec3 intersect_direction{1.0f,1.0f,1.0f};
     glm::vec3 normal;
 

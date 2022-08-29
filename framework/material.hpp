@@ -10,9 +10,9 @@
 
 struct Material {
     std::string name_;
-    Color ka{0,0,0};
-    Color kd{0,0,0};
-    Color ks{0,0,0};
+    Color ka{0,0,0}; //ambient
+    Color kd{0,0,0}; //diffuse
+    Color ks{0,0,0}; //punktlicht (spekular)
     float m_ = 1.0f; //Spekularreflexionsexponente: Oberfläche rau oder glatt
 
     std::ostream& print(std::ostream& os ) const;

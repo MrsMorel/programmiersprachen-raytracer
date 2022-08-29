@@ -58,18 +58,9 @@ void Renderer::render(const Scene &s) {
     for (unsigned y = 0; y < height_; ++y) {
         for (unsigned x = 0; x < width_; ++x) {
             Pixel p(x,y);
-            //Ray ray = s.camera.c_ray(x,y, width_, height_);
                        // TODO render fertigstellen
-            /*
-            float vec_x = (x-(width_/2.0f)) +s.camera.direction.x;
-            float vec_y = s.camera.direction.y + y-(height_*0.5f);
-            float vec_z = s.camera.direction.z + (width_/2.0f)/tan((s.camera.fov_x/2.0f)*M_PI/180);
-            glm::vec3 direction{vec_x,vec_y,-vec_z};
-            glm::vec3 origin{0.0f, 0.0f, 0.0f};
-           // glm::vec3 vec{x-width_/2.0f, y-height_/2.0f, (-(width_/2.0f)/std::tan(s.camera.fov_x/M_PI/360.0f))};
-            Ray ray{origin, glm::normalize(direction)};*/
-            Ray ray = s.camera.c_ray(x , y , width_, height_);
 
+            Ray ray = s.camera.c_ray(x , y , width_, height_);
             p.color = tonemap(trace(ray, s));
             write(p);
 
@@ -82,12 +73,13 @@ void Renderer::render(const Scene &s) {
 Color Renderer::trace(const Ray &ray, const Scene &s) {
     std::shared_ptr<Shape> closest_o = nullptr;
     Hitpoint closest_t;
-    for (auto element : s.shape_vector) {
-        auto hit = element->intersect(ray);
+    closest_t.t = INFINITY;
+    for (const auto& element : s.shape_vector) {
+        Hitpoint hit = element->intersect(ray);
         /*if (hit.cut){
             std::cout << "hit" << "\n";
         }*/
-        if (hit.t < closest_t.t){
+        if (hit.cut && hit.t < closest_t.t){
             closest_t = hit;
             closest_o = element;
         }
@@ -106,11 +98,34 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
     //generate new rays if reflection, refraction or shadows
 
     //ambient
+/*
     Color c_ambient = calc_ambient(s, sharedPtr, hitpoint);
     Color c_diffuse = calc_diffuse(s, sharedPtr, hitpoint);
     Color shading = c_ambient + c_diffuse;
-    return shading;
+    return shading;*/
+
+    // other method
+    Color kd_total;
+    for (auto const& light : s.light_vector) {
+        auto hitpoint_to_light =
+                Ray{hitpoint.point, glm::normalize(light->pos - hitpoint.point)};
+        auto n_dot_i = glm::clamp(
+                glm::dot(hitpoint.normal, hitpoint_to_light.direction), 0.f, 1.f);
+        bool shadow = false;
+        for (auto const& sh : s.shape_vector) {
+            if (sharedPtr == sh)
+                continue;
+            if (sh->intersect(hitpoint_to_light).cut)
+                shadow = true;
+        }
+        if (!shadow)
+            kd_total += light->color * light->brightness * sharedPtr->material()->kd * n_dot_i;
+    }
+
+    return sharedPtr->material()->ka * s.ambient.color  + kd_total;
+
 }
+
 Color Renderer::tonemap(Color const& clr){
     Color color_help{ clr.r / (clr.r + 1.0f) , clr.g / (clr.g + 1.0f) , clr.b / (clr.b + 1.0f)};
     return color_help;
@@ -144,8 +159,8 @@ Color Renderer::calc_diffuse( Scene const& scene, std::shared_ptr<Shape> const& 
         bool obstacle = false;
         Hitpoint light_hit;
 
-        glm::vec3 vec_lights{light->pos - hit.intersect_pt};
-        Ray ray_lights{hit.intersect_pt + 0.1f * hit.normal,glm::normalize(vec_lights)}; //checks if obstacle is between Light and intersection
+        glm::vec3 vec_lights{light->pos - hit.point};
+        Ray ray_lights{hit.point + 0.1f * hit.normal,glm::normalize(vec_lights)}; //checks if obstacle is between Light and intersection
 
         for(auto i : scene.shape_vector){
             light_hit = i->intersect(ray_lights);
@@ -175,8 +190,8 @@ Color Renderer::calc_diffuse( Scene const& scene, std::shared_ptr<Shape> const& 
     //std::cout << "the Vec has this many elements: " << result.size() << std::endl;
     //std::cout << "first element: " << result[0] << std::endl;
     for(auto clr : result){
-        Color clamp_clr = clamping(clr);
-        diffused_clr += clamp_clr;
+        //Color clamp_clr = clamping(clr);
+        //diffused_clr += clamp_clr;
     }
     //std::cout << diffused_clr << std::endl;
     //std::cout << "" << std::endl;

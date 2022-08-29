@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
   unsigned const image_height = 600;
   std::string const filename = "./checkerboard.ppm";
 
-  Scene s = sdfParser("./example.sdf");
+  //Scene s = sdfParser("./example1.sdf");
   //std::cout << s.material_map.empty() << "\n";
   //std::cout << s.material_map.begin()->second << "\n";
   //material test
@@ -22,17 +22,22 @@ int main(int argc, char* argv[])
         std::cout << element.first << "\n";
     }
 */
-  Renderer renderer{image_width, image_height, filename};
+  /*Renderer renderer{image_width, image_height, filename};
   renderer.render(s);
+*/
 
-  Window window{{image_width, image_height}};
+  auto scene = sdfParser("../source/example2.sdf");
+        Renderer renderer{scene.rend.width, scene.rend.height, scene.rend.filename};
+        renderer.render(scene);
+        /*
+Window window{{image_width, image_height}};
 
   while (!window.should_close()) {
     if (window.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
       window.close();
     }
     window.show(renderer.color_buffer());
-  }
+  }*/
 
   return 0;
 }

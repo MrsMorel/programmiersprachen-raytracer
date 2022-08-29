@@ -52,7 +52,7 @@ struct Color
     return tmp;
   }
 
-    Color& operator*=(Color const& other)
+  Color& operator*=(Color const& other)
     {
         r *= other.r;
         g *= other.g;
@@ -83,10 +83,10 @@ struct Color
         return *this;
     }
 
-
+/*
     friend Color clamping(Color const& a){
         return {glm::clamp(a.r,0.0f,1.0f),glm::clamp(a.g,0.0f,1.0f),glm::clamp(a.b,0.0f,1.0f)};
-    }
+    }*/
 
   float r;
   float g;
