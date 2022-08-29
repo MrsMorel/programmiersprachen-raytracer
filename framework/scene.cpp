@@ -83,13 +83,7 @@ Scene sdfParser(std::string const& file_path){
                 sc.light_vector.push_back(std::make_shared<Light>(light));
                 std::cout << "successfully created light" << std::endl;
             }
-            if ("ambient" == keyword){ //ambiente Grundbeleuchtung
-                float color_r, color_g, color_b;
-                iss >> color_r >> color_g >> color_b;
-                sc.ambient.color = {color_r, color_g, color_b};
-                sc.ambient.name = "ambient light";
-                std::cout << "successfully created ambient light" << std::endl;
-            }
+
             if ("camera" == keyword){
                 std::string cam_name;
                 float fov_x;
@@ -111,6 +105,13 @@ Scene sdfParser(std::string const& file_path){
             sc.rend.height = y_res;
             std::cout << "successfully created render "<< sc.rend.camera_name << std::endl;
             //erzeugt bild der szene und legt datei ab mit auflösung
+        }
+        if ("ambient" == keyword){ //ambiente Grundbeleuchtung
+            float color_r, color_g, color_b;
+            iss >> color_r >> color_g >> color_b;
+            sc.ambient.color = {color_r, color_g, color_b};
+            sc.ambient.name = "ambient light";
+            std::cout << "successfully created ambient light" << std::endl;
         }
     }
     sdf_filestream.close();
