@@ -17,39 +17,44 @@
 #include <string>
 #include <glm/glm.hpp>
 
-class Renderer
-{
+class Renderer {
 public:
-  Renderer(unsigned w, unsigned h, std::string const& file);
+    Renderer(unsigned w, unsigned h, std::string const &file);
 
-  void render();
-  void render(Scene const& s, Camera const& c);
-  void write(Pixel const& p);
-  Color trace(Ray const& ray, Scene const& s);
+    void render();
+    void render(Scene const &s);
+    void write(Pixel const &p);
+    Color trace(Ray const &ray, Scene const &s);
+    Color shade(const Scene &scene, std::shared_ptr<Shape> const &sharedPtr, const Ray &ray, Hitpoint hitpoint);
+    Color calc_diffuse(const Scene &s, std::shared_ptr<Shape> const &sharedPtr, const Hitpoint &hitpoint);
+    Color tonemap(const Color &clr);
+    Color calc_ambient(const Scene &s, std::shared_ptr<Shape> const &sharedPtr, const Hitpoint &hitpoint);
+    inline std::vector<Color> const &color_buffer() const {
+        return color_buffer_;
+    }
 
-  inline std::vector<Color> const& color_buffer() const
-  {
-    return color_buffer_;
-  }
-  inline unsigned get_width() const {
+    inline unsigned get_width() const {
         return width_;
-  }
-  inline unsigned get_height() const {
+    }
+
+    inline unsigned get_height() const {
         return height_;
-  }
-  inline std::string get_filename() const {
+    }
+
+    inline std::string get_filename() const {
         return filename_;
-  }
+    }
 
 private:
-  unsigned width_;
-  unsigned height_;
-  std::vector<Color> color_buffer_;
-  std::string filename_;
-  PpmWriter ppm_;
+    unsigned width_;
+    unsigned height_;
+    std::vector<Color> color_buffer_;
+    std::string filename_;
+    PpmWriter ppm_;
 
-  Color shade(const Scene &scene, std::shared_ptr<Shape> const& sharedPtr, const Ray &ray, Hitpoint hitpoint);
-  Color calc_diffuse(const Scene &s, std::shared_ptr<Shape> const& sharedPtr,const Hitpoint& hitpoint);
+
+
 };
+Renderer sdf_render(std::string const& filename);
 
 #endif // #ifndef BUW_RENDERER_HPP

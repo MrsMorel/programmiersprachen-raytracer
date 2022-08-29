@@ -17,5 +17,9 @@ struct Hitpoint{
     std::shared_ptr<Material> material{};
     glm::vec3 intersection{0.0f,0.0f,0.0f};
     glm::vec3 direction{1.0f,1.0f,1.0f};
+    glm::vec3 intersect_pt{0.0f,0.0f,0.0f};
+    glm::vec3 intersect_direction{1.0f,1.0f,1.0f};
+    glm::vec3 normal;
+
 };
 #endif //HITPOINT_HPP

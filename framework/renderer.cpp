@@ -16,7 +16,7 @@ Renderer::Renderer(unsigned w, unsigned h, std::string const& file)
   , filename_(file)
   , ppm_(width_, height_)
 {}
-
+/*
 void Renderer::render()
 {
     //render checker pattern
@@ -36,7 +36,7 @@ void Renderer::render()
   }
   ppm_.save(filename_);
 }
-
+*/
 void Renderer::write(Pixel const& p)
 {
   // flip pixels, because of opengl glDrawPixels
@@ -53,16 +53,24 @@ void Renderer::write(Pixel const& p)
   ppm_.write(p);
 }
 
-void Renderer::render(const Scene &s, const Camera &c) {
+void Renderer::render(const Scene &s) {
+
     for (unsigned y = 0; y < height_; ++y) {
         for (unsigned x = 0; x < width_; ++x) {
             Pixel p(x,y);
-            float dist = (width_/2.0f) /std::tan(c.fov_x * M_PI / 360.0f);
-            glm::vec3 direction = {x-(width_ / 2.0f), y - (height_ / 2.0f), -dist};
-            Ray ray{s.camera.position, glm::normalize(direction)};
-            // TODO render fertigstellen
-            
-            p.color = trace(ray, s);
+            //Ray ray = s.camera.c_ray(x,y, width_, height_);
+                       // TODO render fertigstellen
+            /*
+            float vec_x = (x-(width_/2.0f)) +s.camera.direction.x;
+            float vec_y = s.camera.direction.y + y-(height_*0.5f);
+            float vec_z = s.camera.direction.z + (width_/2.0f)/tan((s.camera.fov_x/2.0f)*M_PI/180);
+            glm::vec3 direction{vec_x,vec_y,-vec_z};
+            glm::vec3 origin{0.0f, 0.0f, 0.0f};
+           // glm::vec3 vec{x-width_/2.0f, y-height_/2.0f, (-(width_/2.0f)/std::tan(s.camera.fov_x/M_PI/360.0f))};
+            Ray ray{origin, glm::normalize(direction)};*/
+            Ray ray = s.camera.c_ray(x , y , width_, height_);
+
+            p.color = tonemap(trace(ray, s));
             write(p);
 
         }
@@ -72,13 +80,11 @@ void Renderer::render(const Scene &s, const Camera &c) {
 //todo durch kamera generierten strahl mit scene schneiden, hitpoint über lichtquellen beleuchten
 
 Color Renderer::trace(const Ray &ray, const Scene &s) {
-    std::shared_ptr<Shape> closest_o;
+    std::shared_ptr<Shape> closest_o = nullptr;
     Hitpoint closest_t;
-    Color background_color{0.0f,0.0f,0.0f};
-    for (const auto& element : s.shape_vector) {
+    for (auto element : s.shape_vector) {
         auto hit = element->intersect(ray);
-        float distance = glm::distance(s.camera.position, hit.intersection);
-       /* if (hit.cut){
+        /*if (hit.cut){
             std::cout << "hit" << "\n";
         }*/
         if (hit.t < closest_t.t){
@@ -89,7 +95,7 @@ Color Renderer::trace(const Ray &ray, const Scene &s) {
     if (closest_o != nullptr){
         return shade(s, closest_o, ray, closest_t);
     } else {
-        return background_color;
+        return s.ambient.color;
     }
 }
 //TODO shade implementieren
@@ -98,12 +104,23 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
     //point x = r(t) , t=distance into ray equation
     //evaluate illumination equation
     //generate new rays if reflection, refraction or shadows
+
     //ambient
+    Color c_ambient = calc_ambient(s, sharedPtr, hitpoint);
+    Color c_diffuse = calc_diffuse(s, sharedPtr, hitpoint);
+    Color shading = c_ambient + c_diffuse;
+    return shading;
+}
+Color Renderer::tonemap(Color const& clr){
+    Color color_help{ clr.r / (clr.r + 1.0f) , clr.g / (clr.g + 1.0f) , clr.b / (clr.b + 1.0f)};
+    return color_help;
+}
+
+Color Renderer::calc_ambient(const Scene &s, const std::shared_ptr<Shape> &sharedPtr, const Hitpoint &hitpoint) {
     Color ka = sharedPtr->material()->ka;
-    Color ambient = s.ambient.color;
     Color calc_ambient = ka * s.ambient.color;
-    Color shading = calc_ambient;
-    return shading;}
+    return calc_ambient ;
+}
 /*
 Color Renderer::calc_diffuse(const Scene &s, const std::shared_ptr<Shape> &sharedPtr, const Hitpoint& hitpoint) {
     //diffuse
@@ -119,6 +136,101 @@ Color Renderer::calc_diffuse(const Scene &s, const std::shared_ptr<Shape> &share
     }
     return Color();
 }*/
+Color Renderer::calc_diffuse( Scene const& scene, std::shared_ptr<Shape> const& shape,Hitpoint const& hit){
+    Color diffused_clr{0.0f,0.0f,0.0f};
+    std::vector<Color> result;
+
+    for(auto light : scene.light_vector){
+        bool obstacle = false;
+        Hitpoint light_hit;
+
+        glm::vec3 vec_lights{light->pos - hit.intersect_pt};
+        Ray ray_lights{hit.intersect_pt + 0.1f * hit.normal,glm::normalize(vec_lights)}; //checks if obstacle is between Light and intersection
+
+        for(auto i : scene.shape_vector){
+            light_hit = i->intersect(ray_lights);
+            // erstmal unwichtig  std::cout << i->intersect(ray_lights).intersect_pt_.x << " " << i->intersect(ray_lights).intersect_pt_.y << " " << i->intersect(ray_lights).intersect_pt_.z << std::endl;
+            if(light_hit.cut){
+                obstacle = true;
+            }
+        }
+
+        if(obstacle){
+            //std::cout << "we use the obstacle, it is true" << std::endl;
+            Color ip{light->color * light->brightness};
+            Color kd = shape->material()->kd;
+            float cross_prod = -(glm::dot(hit.normal,glm::normalize(vec_lights)));
+            //std::cout << cross_prod << std::endl;
+            cross_prod = std::max(cross_prod, 0.0f);
+            //std::cout << cross_prod << std::endl;
+            //std::cout << kd;
+            //std::cout << ip;
+            //printVec(vec_lights);
+            //printVec(hit.normal_);
+            //std::cout << ((ip*kd)*cross_prod) << std::endl;
+            result.push_back({(ip*kd)*cross_prod});
+            //std::cout << std::endl;
+        }
+    }
+    //std::cout << "the Vec has this many elements: " << result.size() << std::endl;
+    //std::cout << "first element: " << result[0] << std::endl;
+    for(auto clr : result){
+        Color clamp_clr = clamping(clr);
+        diffused_clr += clamp_clr;
+    }
+    //std::cout << diffused_clr << std::endl;
+    //std::cout << "" << std::endl;
+    return diffused_clr;
+}
+
+
+/*
+Color Renderer::calculateSpecular(std::shared_ptr<Shape> const& shape, Scene const& scene, HitPoint const& hit){
+    Color spec_clr{0.0f,0.0f,0.0f};
+    std::vector<Color> calc_clrs;
+
+    for(auto light : scene.light_vec){
+        bool obstacle = false;
+        HitPoint light_hit;
+
+        glm::vec3 vec_lights{light->pos_ - hit.intersect_pt_};
+        Ray ray_lights{hit.intersect_pt_ + 0.1f * hit.normal_,glm::normalize(vec_lights)}; //checks if obstacle is between Light and intersection
+
+        for(auto i : scene.shape_vec){
+            light_hit = i->intersect(ray_lights);
+            if(light_hit.intersection_){
+                obstacle = true;
+            }
+        }
+
+        if(obstacle){
+            float m = shape->getMat()->m_;
+            glm::vec3 r = 2.0f*glm::dot(hit.normal_,glm::normalize(vec_lights))*hit.normal_-glm::normalize(vec_lights); //glm::dot -> Skalarprodukt
+            //printVec(r);
+            glm::vec3 v = glm::normalize(scene.camera_.pos_ - hit.intersect_pt_);
+            //printVec(v);
+            //std::cout << std::endl;
+            float cross_prod = glm::dot(r,v);
+            cross_prod = std::max(cross_prod, 0.0f);
+            if(cross_prod < 0){
+                cross_prod = -cross_prod;}
+            Color ks = shape->getMat()->ks_;
+            Color ip{light->color_*light->brightness_};
+            float cos = pow(cross_prod,m);
+            float m_2 = (m+2)/(2*M_PI);
+            calc_clrs.push_back({((ks*ip)*cos)*m_2});
+        }
+
+    }
+
+    //std::cout << calc_clrs.size();
+    for(auto clr : calc_clrs){
+        Color clamp_clr = {clamping(clr)};
+        spec_clr += clamp_clr;
+    }
+    return spec_clr;
+}*/
+
 
 
 

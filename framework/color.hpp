@@ -11,6 +11,7 @@
 #define BUW_COLOR_HPP
 
 #include <iostream>
+#include <glm/common.hpp>
 
 struct Color
 {
@@ -64,6 +65,27 @@ struct Color
         g *= other.g;
         b *= other.b;
         return *this;
+    }
+
+
+    Color& operator*=(float const& other)
+    {
+        r *= other;
+        g *= other;
+        b *= other;
+        return *this;
+    }
+    Color& operator*(float const& other)
+    {
+        r *= other;
+        g *= other;
+        b *= other;
+        return *this;
+    }
+
+
+    friend Color clamping(Color const& a){
+        return {glm::clamp(a.r,0.0f,1.0f),glm::clamp(a.g,0.0f,1.0f),glm::clamp(a.b,0.0f,1.0f)};
     }
 
   float r;

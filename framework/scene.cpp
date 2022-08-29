@@ -95,9 +95,8 @@ Scene sdfParser(std::string const& file_path){
                 float fov_x;
                 iss >> cam_name;
                 iss >> fov_x;
-                sc.camera.name = cam_name;
-                sc.camera.fov_x = fov_x;
-                std::cout << "successfully created camera " << sc.camera.name <<std::endl;
+                Camera cam{cam_name, fov_x};
+                std::cout << "successfully created camera " << cam_name <<std::endl;
             }
         }
         if ("render" == keyword){
