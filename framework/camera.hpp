@@ -7,6 +7,8 @@
 
 #include <string>
 #include <glm/glm.hpp>
+#include <cmath>
+#include <glm/gtc/constants.hpp>
 #include "ray.hpp"
 
 class Camera{

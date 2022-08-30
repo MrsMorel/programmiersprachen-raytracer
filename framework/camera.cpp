@@ -14,7 +14,7 @@ Camera::Camera(const std::string &name, float fov_x) :
 
 Ray Camera::c_ray(unsigned x, unsigned y, unsigned int width, unsigned int height) const {
     Ray ray{eye_};
-    float direction = (width/2.0f) / tan(fov_x * (M_PI / 180.0f));
+    float direction = ((float)width/2.0f) / tan(fov_x * (glm::pi<float>() / 180.0f));
     glm::vec3 vec{(float)x- ((float) width/2.0f), (float)y- (float) height/2.0f, -direction};
     ray.direction = direction_ + vec;
     return ray;
