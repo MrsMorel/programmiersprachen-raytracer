@@ -1,0 +1,6 @@
+define material blue 0 0 1 0 0 1 0 0 1 1
+define shape sphere bsphere 0 0 0 10 blue
+define light sun 1000 700 0 .2 .2 .2 100
+define camera eye 45.0
+ambient 0.1 0.1 0.9
+render eye image.ppm 480 320
