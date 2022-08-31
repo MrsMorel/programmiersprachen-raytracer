@@ -10,18 +10,19 @@
 #include <algorithm>
 
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm/glm.hpp>
+#include <glm-0.9.5.3/glm/glm.hpp>
 #define GLM_FORCE_RADIANS
-#include <glm/gtx/transform.hpp>
-#include <glm/vec3.hpp>
-#include <glm/gtc/constants.hpp>
-#include <glm/gtx/intersect.hpp>
+#include <glm-0.9.5.3/glm/gtx/transform.hpp>
+#include <glm-0.9.5.3/glm/vec3.hpp>
+#include <glm-0.9.5.3/glm/gtc/constants.hpp>
+#include <glm-0.9.5.3/glm/gtx/intersect.hpp>
 
 class Shape {
 public:
     Shape();
     virtual ~Shape();
-    Shape(std::string name, std::shared_ptr<Material>  material);
+    Shape(std::string name, std::shared_ptr<Material>  material, glm::mat4 world_transformation,
+    glm::mat4 world_transformation_inv);
     virtual float area() const = 0;
     virtual float volume() const = 0;
     virtual std::ostream& print(std::ostream& os ) const;
@@ -32,10 +33,13 @@ public:
     std::shared_ptr<Material>      material() const;
 
     virtual Hitpoint intersect(Ray const& ray) const = 0;
+
     //private
 private:
     std::string name_;
     std::shared_ptr<Material> material_;
+    glm::mat4 world_transformation_;
+    glm::mat4 world_transformation_inv_;
 };
 std::ostream& operator<<( std::ostream& os , Shape const& s );
 #endif

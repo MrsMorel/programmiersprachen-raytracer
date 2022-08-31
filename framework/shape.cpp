@@ -15,8 +15,12 @@ Shape::~Shape() {
     //std::cout << "Shape destructor " << name_ << "\n";
 }
 
-Shape::Shape(std::string name, std::shared_ptr<Material> material) :
-        name_{name}, material_{std::move(material)} {}
+Shape::Shape(std::string name, std::shared_ptr<Material> material, glm::mat4 world_transformation,
+    glm::mat4 world_transformation_inv) :
+    name_{ name }, 
+    material_{ std::move(material) },
+    world_transformation_{world_transformation},
+    world_transformation_inv_{world_transformation_inv} {}
 
 std::ostream &Shape::print(std::ostream &os) const {
     std::cout << "\n";
