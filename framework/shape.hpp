@@ -9,6 +9,7 @@
 #include "hitpoint.hpp"
 #include <algorithm>
 
+
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm-0.9.5.3/glm/glm.hpp>
 #define GLM_FORCE_RADIANS
@@ -49,5 +50,7 @@ std::ostream& operator<<(std::ostream& os, Shape const& s);
 Ray transformRay(glm::mat4 const& mat, Ray const& ray);
 glm::vec3 transformPoint(glm::mat4 const& mat, glm::vec3 const& point);
 glm::vec3 transformVector(glm::mat4 const& mat, glm::vec3 const& vector);
+void transformBack(Hitpoint const& Hitpoint, glm::mat4 const& mat);
+
 #endif
 
