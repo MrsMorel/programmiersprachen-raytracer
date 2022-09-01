@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     }
 */
 
-  auto scene = sdfParser("../source/test.sdf");
+  auto scene = sdfParser("../source/example2.sdf");
         Renderer renderer{scene.rend.width, scene.rend.height, scene.rend.filename};
         renderer.render(scene);
 

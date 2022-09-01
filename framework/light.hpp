@@ -8,6 +8,6 @@ struct Light{
     std::string name;
     glm::vec3 pos = {0.0f, 0.0f, 0.0f};
     Color color = {0.0f, 0.0f, 0.0f};
-    float brightness = 0.0f;
+    float brightness = 0.5f;
 };
 #endif //LIGHT_HPP
