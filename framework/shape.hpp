@@ -21,8 +21,7 @@ class Shape {
 public:
     Shape();
     virtual ~Shape();
-    Shape(std::string name, std::shared_ptr<Material>  material, glm::mat4 world_transformation,
-    glm::mat4 world_transformation_inv);
+    Shape(std::string name, std::shared_ptr<Material>  material);
     virtual float area() const = 0;
     virtual float volume() const = 0;
     virtual std::ostream& print(std::ostream& os ) const;
@@ -41,6 +40,10 @@ private:
     glm::mat4 world_transformation_;
     glm::mat4 world_transformation_inv_;
 };
-std::ostream& operator<<( std::ostream& os , Shape const& s );
+std::ostream& operator<<(std::ostream& os, Shape const& s);
+
+Ray transformRay(glm::mat4 const& mat, Ray const& ray);
+glm::vec3 transformPoint(glm::mat4 const& mat, glm::vec3 const& point);
+glm::vec3 transformVector(glm::mat4 const& mat, glm::vec3 const& vector);
 #endif
 
