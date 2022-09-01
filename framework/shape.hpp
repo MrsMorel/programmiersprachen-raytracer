@@ -33,6 +33,10 @@ public:
 
     virtual Hitpoint intersect(Ray const& ray) const = 0;
 
+    void translate(glm::vec3 const& point);
+    void rotate(float& degree, glm::vec3 const& point);
+    void scale(glm::vec3 const& point);
+
     //private
 private:
     std::string name_;
