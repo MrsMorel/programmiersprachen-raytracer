@@ -52,9 +52,28 @@ void Renderer::write(Pixel const& p)
 
   ppm_.write(p);
 }
+/*
+void Renderer::render(const Scene &s) {
+    for (unsigned y = 0; y < s.rend.height; ++y) {
+        for (unsigned x = 0; x < s.rend.width; ++x) {
+            Pixel p{x,y};
+            for (const auto& element : s.shape_vector) {
+                Ray ray = s.camera.c_ray(x , y , s.rend.width, s.rend.height);
+                std::cout << ray.direction.x << "\n";
+                Hitpoint hit = element->intersect(ray);
+                if (hit.cut) {
+                    std::cout << "cut" << "\n";
+                    p.color = {1.0f,0.0f,0.0f};
+                }
+
+            }
+            write(p);
+        }
+    }
+    ppm_.save(filename_);
+}*/
 
 void Renderer::render(const Scene &s) {
-
     for (unsigned y = 0; y < s.rend.height; ++y) {
         for (unsigned x = 0; x < s.rend.width; ++x) {
             Pixel p{x,y};
@@ -85,7 +104,12 @@ Color Renderer::trace(const Ray &ray, const Scene &s) {
     }
     if (closest_o != nullptr){
         std::cout << "aaaaa" << "\n";
-        return shade(s, closest_o, ray, closest_t);
+
+        Color shaded =  shade(s, closest_o, ray, closest_t);
+        Color depth{closest_t.t/10.0f, closest_t.t /10.0f, closest_t.t/10.0f};
+        Color position{std::abs(closest_t.point.x /200.0f),std::abs(closest_t.point.y /200.0f),std::abs(closest_t.point.z /200.0f)};
+        Color normal = {std::abs(closest_t.normal.x), std::abs(closest_t.normal.y), std::abs(closest_t.normal.z)};
+        return shaded;
     } else {
         return s.ambient.color;
     }
@@ -101,22 +125,21 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
     Color ka_ambient = calc_ambient(s, sharedPtr, hitpoint);
     // calc diffuse
     //Color kd_diffuse = calc_diffuse(s, sharedPtr, hitpoint);
-    Color kd_diffuse;
+    Color kd_diffuse{0.0f,0.0f,0.0f};
     for (auto const &light: s.light_vector) {
-        bool block = false;
-        auto light_hit = Ray{hitpoint.point, glm::normalize(light->pos - hitpoint.point)};
-        //auto n = glm::clamp(glm::dot(hitpoint.normal, light_hit.direction), 0.0f, 1.0f);
-        float dot_l_n = std::max(glm::dot(hitpoint.normal, light_hit.direction), 0.0f);
+        bool block = false; //normal muss in intersect an hitpoint gegeben werden!
+        auto light_hit = Ray{hitpoint.point + hitpoint.normal * 0.001f, glm::normalize(light->pos - hitpoint.point)};
         for (auto const &sh: s.shape_vector) {
-            if (sharedPtr == sh)
-                continue;
-            if (sh->intersect(light_hit).cut)
+            if (sh->intersect(light_hit).cut) {
                 block = true;
                 std::cout << "block" << "\n";
-
+                break;
+            }
         }
-        if (!block)
+        if (!block){
+            float dot_l_n = std::max(glm::dot(hitpoint.normal, light_hit.direction), 0.0f);
             kd_diffuse += (light->color * light->brightness * sharedPtr->material()->kd * dot_l_n);
+        }
     }
     return ka_ambient + kd_diffuse;
 }
@@ -156,8 +179,8 @@ Color Renderer::calc_diffuse( Scene const& scene, std::shared_ptr<Shape> const& 
         }
     }
     return c_diffuse;
-}
-*/
+}*/
+
 
 
 
