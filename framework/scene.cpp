@@ -113,6 +113,51 @@ Scene sdfParser(std::string const& file_path){
             sc.ambient.name = "ambient light";
             std::cout << "successfully created ambient light" << std::endl;
         }
+        if ("transform" == keyword) {
+            std::string shape_name;
+            iss >> shape_name;
+            auto it = sc.shape_vector.begin();
+            while ((*it)->name() != shape_name) {
+                ++it;
+            }
+            std::shared_ptr<Shape> obj = *it;
+
+            std::string transformation_type;
+            iss >> transformation_type;
+            if ("translate" == transformation_type) {
+                float x;
+                float y;
+                float z;
+                iss >> x;
+                iss >> y;
+                iss >> z;
+                obj->translate(glm::vec3{ x,y,z });
+                std::cout << "translated" << shape_name << std::endl;
+            }
+            if ("rotate" == transformation_type) {
+                float degree;
+                float x;
+                float y;
+                float z;
+                iss >> degree;
+                degree = degree / 360 * 2 * glm::pi<float>();
+                iss >> x;
+                iss >> y;
+                iss >> z;
+                obj->rotate(degree, glm::vec3{ x,y,z });
+                std::cout << "rotated" << shape_name << std::endl;
+            }
+            if ("scale" == transformation_type) {
+                float x;
+                float y;
+                float z;
+                iss >> x;
+                iss >> y;
+                iss >> z;
+                obj->scale(glm::vec3{ x,y,z });
+                std::cout << "scaled" << shape_name << std::endl;
+            }
+        }
     }
     sdf_filestream.close();
     return sc;

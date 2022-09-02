@@ -83,6 +83,6 @@ Ray transformRay(glm::mat4 const& mat, Ray const& ray) {
 void transformBack(Hitpoint& hitpoint, glm::mat4 const& mat, glm::mat4 mat_inverse_t) {
     hitpoint.point = glm::vec3{ glm::vec4{ hitpoint.point,1.0f }*mat };
     hitpoint.normal = glm::normalize(glm::vec3{ glm::vec4{ hitpoint.normal, 0.0f }*mat_inverse_t });
-    hitpoint.direction = glm::normalize(glm::vec3{ glm::vec4{ hitpoint.direction,0.0f }*mat });
+    //hitpoint.direction = glm::normalize(glm::vec3{ glm::vec4{ hitpoint.direction,0.0f }*mat });
 }
 
