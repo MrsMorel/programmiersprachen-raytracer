@@ -136,9 +136,13 @@ Scene sdfParser(std::string const& file_path){
         if ("transform" == keyword) {
             std::string shape_name;
             iss >> shape_name;
+
             auto it = sc.shape_vector.begin();
-            while ((*it)->name() != shape_name) {
-                ++it;
+            if (sc.shape_vector.size() != 1)
+            {
+                while ((*it)->name() != shape_name) {
+                    ++it;
+                }
             }
             std::shared_ptr<Shape> obj = *it;
 
@@ -152,7 +156,7 @@ Scene sdfParser(std::string const& file_path){
                 iss >> y;
                 iss >> z;
                 obj->translate(glm::vec3{ x,y,z });
-                std::cout << "translated" << shape_name << std::endl;
+                std::cout << "translated " << shape_name << std::endl;
             }
             if ("rotate" == transformation_type) {
                 float degree;
@@ -160,12 +164,12 @@ Scene sdfParser(std::string const& file_path){
                 float y;
                 float z;
                 iss >> degree;
-                degree = degree / 360 * 2 * glm::pi<float>();
+                degree = degree / 180 * glm::pi<float>();
                 iss >> x;
                 iss >> y;
                 iss >> z;
                 obj->rotate(degree, glm::vec3{ x,y,z });
-                std::cout << "rotated" << shape_name << std::endl;
+                std::cout << "rotated " << shape_name << std::endl;
             }
             if ("scale" == transformation_type) {
                 float x;
@@ -175,7 +179,7 @@ Scene sdfParser(std::string const& file_path){
                 iss >> y;
                 iss >> z;
                 obj->scale(glm::vec3{ x,y,z });
-                std::cout << "scaled" << shape_name << std::endl;
+                std::cout << "scaled " << shape_name << std::endl;
             }
         }
     }
