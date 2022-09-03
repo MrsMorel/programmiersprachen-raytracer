@@ -44,7 +44,7 @@ Hitpoint Sphere::intersect(const Ray &ray) const {
     if (hit){
         int x = 5;
     }
-    return Hitpoint{hit, t, name(), material(), ray.direction, hitpoint, ray.direction, normal};
+    return Hitpoint{hit, t, name(), material(), ray.direction, hitpoint, normal};
 }
 
 Sphere::~Sphere() {

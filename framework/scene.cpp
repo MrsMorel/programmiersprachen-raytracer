@@ -15,6 +15,9 @@ Scene sdfParser(std::string const& file_path){
         std::istringstream iss(line_buffer);
         std::string keyword = " ";
         iss >> keyword;
+        if ("#" == keyword){
+            continue;
+        }
         if ("define" == keyword){
             iss >> keyword;
             if ("material" == keyword){
@@ -81,16 +84,30 @@ Scene sdfParser(std::string const& file_path){
                 iss >> brightness;
                 Light light{name, pos, {color_r, color_g, color_b}, brightness};
                 sc.light_vector.push_back(std::make_shared<Light>(light));
-                std::cout << "successfully created light" << std::endl;
+                std::cout << "successfully created light: " << light.name<< std::endl;
+                std::cout << "pos, x: " << light.pos.x << "   y: " << light.pos.y << "  z: " << light.pos.z << "\n";
+                std::cout << "color, x: " << light.color.r << "   y: " << light.color.g << "  z: " << light.color.b << "\n";
+                std::cout << "brightness: " << brightness << "\n";
+                std::cout << "\n";
             }
 
             if ("camera" == keyword){
                 std::string cam_name;
                 float fov_x;
+                float dir_x , dir_y, dir_z;
+                float up_x, up_y, up_z;
                 iss >> cam_name;
                 iss >> fov_x;
-                Camera cam{cam_name, fov_x};
+                iss >> dir_x >> dir_y >> dir_z;
+                iss >> up_x >> up_y >> up_z;
+                Camera cam{cam_name, fov_x, {dir_x, dir_y, dir_z}, {up_x, up_y, up_z}};
                 std::cout << "successfully created camera " << cam_name <<std::endl;
+                std::cout << "fov_x: " << fov_x << "\n";
+                std::cout << "eye, x: " << cam.get_eye().x << "   y: " << cam.get_eye().y << "  z: " << cam.get_eye().z << "\n";
+                std::cout << "direction, x: " << cam.get_direction().x << "   y: " << cam.get_direction().y << "  z: " << cam.get_direction().z << "\n";
+                std::cout << "up, x: " << cam.get_up().x << "   y: " << cam.get_up().y << "  z: " << cam.get_up().z << "\n";
+                std::cout << "\n";
+
             }
         }
         if ("render" == keyword){
@@ -112,6 +129,9 @@ Scene sdfParser(std::string const& file_path){
             sc.ambient.color = {color_r, color_g, color_b};
             sc.ambient.name = "ambient light";
             std::cout << "successfully created ambient light" << std::endl;
+            std::cout << "\n";
+            std::cout << "name: " << sc.ambient.name << "\n";
+            std::cout << "color, r: " << sc.ambient.color.r << "   g: " << sc.ambient.color.g << "  b: " << sc.ambient.color.b << "\n";
         }
         if ("transform" == keyword) {
             std::string shape_name;

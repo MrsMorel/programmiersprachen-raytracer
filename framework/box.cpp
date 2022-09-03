@@ -65,6 +65,7 @@ glm::vec3 Box::max() const {
 }
 
 Hitpoint Box::intersect(Ray const& ray) const {
+    glm::vec3 normal;
     glm::vec3 normalized_direction = glm::normalize(ray.direction);
     float t1 = (min_.x - ray.origin.x) / normalized_direction.x;
     float t2 = (min_.y - ray.origin.y) / normalized_direction.y;
@@ -85,8 +86,13 @@ Hitpoint Box::intersect(Ray const& ray) const {
             if (p.y <= max_.y && p.y >= min_.y && 
                 p.z <= max_.z && p.z >= min_.z &&
                 p.x <= max_.x && p.x >= min_.x) {
-                
-                return Hitpoint{true, i, name(), material(), p, normalized_direction};
+                if (t1 == i) normal = {-1.0f,0.0f,0.0f};
+                if (t4 == i) normal = {1.0f,0.0f,0.0f};
+                if (t2 == i) normal = {0.0f, -1.0f, 0.0f};
+                if (t5 == i) normal = {0.0f, 1.0f, 0.0f};
+                if (t3 == i) normal = {0.0f,0.0f,-1.0f};
+                if (t6 == i) normal = {0.0f, 0.0f, 1.0f};
+                return Hitpoint{true, i, name(), material(), normalized_direction, normalized_direction, normal};
             }
         }
     }

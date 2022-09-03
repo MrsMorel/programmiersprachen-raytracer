@@ -8,15 +8,13 @@
 #include "ray.hpp"
 #include "hitpoint.hpp"
 #include <algorithm>
-
-
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm-0.9.5.3/glm/glm.hpp>
+#include <glm/glm.hpp>
 #define GLM_FORCE_RADIANS
-#include <glm-0.9.5.3/glm/gtx/transform.hpp>
-#include <glm-0.9.5.3/glm/vec3.hpp>
-#include <glm-0.9.5.3/glm/gtc/constants.hpp>
-#include <glm-0.9.5.3/glm/gtx/intersect.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/vec3.hpp>
+#include <glm/gtc/constants.hpp>
+#include <glm/gtx/intersect.hpp>
 
 class Shape {
 public:
