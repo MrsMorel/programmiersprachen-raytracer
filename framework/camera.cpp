@@ -34,6 +34,20 @@ std::ostream& Camera::operator<<(std::ostream &os) const {
     return os;
 }
 
+glm::mat4 Camera::transformation_matrix() {
+    glm::vec3 direction = glm::normalize(direction_);
+    glm::vec3 up = glm::normalize(up_);
+    glm::vec3 u = glm::normalize(glm::cross(direction, up));
+    glm::vec3 v = glm::normalize(glm::cross(u, direction));
+
+    glm::mat4 mat{ u.x, u.y, u.z, 0.0f,
+    v.x, v.y, v.z, 0.0f,
+    -direction.x, -direction.y, -direction.z, 0.0f,
+    eye_.x, eye_.y, eye_.z, 1.0f };
+
+    return mat;
+}
+
 
 
 

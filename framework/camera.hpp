@@ -19,6 +19,7 @@ public:
     Camera(std::string const& name, float fov_x, glm::vec3 direction, glm::vec3 up);
     Ray c_ray(unsigned x, unsigned y, unsigned width, unsigned height) const;
     std::ostream& operator<<(std::ostream &os) const;
+    glm::mat4 transformation_matrix();
 
     inline std::string get_name() const {
         return name_;
