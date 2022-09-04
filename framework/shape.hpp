@@ -9,12 +9,12 @@
 #include "hitpoint.hpp"
 #include <algorithm>
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm/glm.hpp>
+#include <glm-0.9.5.3/glm/glm.hpp>
 #define GLM_FORCE_RADIANS
-#include <glm/gtx/transform.hpp>
-#include <glm/vec3.hpp>
-#include <glm/gtc/constants.hpp>
-#include <glm/gtx/intersect.hpp>
+#include <glm-0.9.5.3/glm/gtx/transform.hpp>
+#include <glm-0.9.5.3/glm/vec3.hpp>
+#include <glm-0.9.5.3/glm/gtc/constants.hpp>
+#include <glm-0.9.5.3/glm/gtx/intersect.hpp>
 #include "epsilon.hpp"
 
 class Shape {
@@ -36,6 +36,8 @@ public:
     void translate(glm::vec3 const& point);
     void rotate(float& degree, glm::vec3 const& point);
     void scale(glm::vec3 const& point);
+    glm::mat4 world_transformation() const;
+    void update_world_transformation(glm::mat4 const& mat);
 
     //private
 private:
@@ -49,7 +51,8 @@ std::ostream& operator<<(std::ostream& os, Shape const& s);
 Ray transformRay(glm::mat4 const& mat, Ray const& ray);
 glm::vec3 transformPoint(glm::mat4 const& mat, glm::vec3 const& point);
 glm::vec3 transformVector(glm::mat4 const& mat, glm::vec3 const& vector);
-void transformBack(Hitpoint const& Hitpoint, glm::mat4 const& mat);
+void transformBack(Hitpoint& Hitpoint, glm::mat4 const& mat);
+
 
 #endif
 
