@@ -108,9 +108,7 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
         auto light_hit = Ray{hitpoint.point + (hitpoint.normal * 0.0001f), glm::normalize(light->pos - hitpoint.point)};
         //light origin negativ?
         //auto i = light_hit.direction;
-        //auto r = i - 2 * glm::dot(i, hitpoint.normal) * hitpoint.normal;
-        //auto v = hitpoint.direction;
-        //auto r_dot_v = glm::clamp(glm::dot(r,v), 0.0f, 1.0f);
+
         //auto n = hitpoint.normal;
         for (auto const &sh: s.shape_vector) {
             if (sh->intersect(light_hit).cut) {
@@ -119,12 +117,18 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
             }
         }
         if (!block){
-            //auto l = light->color * light->brightness;
             glm::vec3 n = hitpoint.normal;
             glm::vec3 i = light_hit.direction;
-            float dot_n_i = glm::clamp(glm::dot(n, i), 0.0f, 1.0f);
+            float dot_n_i = glm::clamp(glm::dot(n, i), 0.0f, 1.0f);//near zero :( changed little bit after playing with "0.0001f"
             kd_diffuse += (light->color * light->brightness * sharedPtr->material()->kd * dot_n_i);
-            //ks_specular += l * sharedPtr->material()->ks * std::pow(r_dot_v, sharedPtr->material()->m_);
+
+            //specular, not working
+            /*
+            glm::vec3 r = i - 2 * glm::dot(i, hitpoint.normal) * hitpoint.normal;
+            glm::vec3 v = hitpoint.direction;
+            float dot_r_v = std::max(glm::dot(r,v), 0.0f); //why zero??
+            ks_specular += light->color * light->brightness * sharedPtr->material()->ks * std::pow(dot_r_v, sharedPtr->material()->m_);
+            */
         }
     }
     return (ka_ambient + kd_diffuse + ks_specular);
