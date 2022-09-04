@@ -82,17 +82,25 @@ Hitpoint Box::intersect(Ray const& ray) const {
             continue;
         }
         else {
-            glm::vec3 p = ray.origin + i * normalized_direction;
-            if (p.y <= max_.y && p.y >= min_.y && 
-                p.z <= max_.z && p.z >= min_.z &&
-                p.x <= max_.x && p.x >= min_.x) {
-                if (t1 == i) normal = {-1.0f,0.0f,0.0f};
-                if (t4 == i) normal = {1.0f,0.0f,0.0f};
-                if (t2 == i) normal = {0.0f, -1.0f, 0.0f};
-                if (t5 == i) normal = {0.0f, 1.0f, 0.0f};
-                if (t3 == i) normal = {0.0f,0.0f,-1.0f};
-                if (t6 == i) normal = {0.0f, 0.0f, 1.0f};
-                return Hitpoint{true, i, name(), material(), normalized_direction, normalized_direction, normal};
+            if (!std::isinf(i)){
+            glm::vec3 p = ray.origin + (i * ray.direction);
+                if ((between_epsilon(min_.x, p.x , max_.x)) &&
+                (between_epsilon(min_.y, p.y, max_.y)) &&
+                (between_epsilon(min_.z, p.z, max_.z))) {
+                    if (t1 == i)
+                        normal = {-1.0f, 0.0f, 0.0f};
+                    if (t4 == i)
+                        normal = {1.0f, 0.0f, 0.0f};
+                    if (t2 == i)
+                        normal = {0.0f, -1.0f, 0.0f};
+                    if (t5 == i)
+                        normal = {0.0f, 1.0f, 0.0f};
+                    if (t3 == i)
+                        normal = {0.0f, 0.0f, -1.0f};
+                    if (t6 == i)
+                        normal = {0.0f, 0.0f, 1.0f};
+                    return {true, i, name(), material(), normalized_direction, p, normal};
+                }
             }
         }
     }

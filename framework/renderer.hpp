@@ -25,7 +25,7 @@ public:
     void render(Scene const &s);
     void write(Pixel const &p);
     Color trace(Ray const &ray, Scene const &s);
-    Color shade(const Scene &scene, std::shared_ptr<Shape> const &sharedPtr, const Ray &ray, Hitpoint hitpoint);
+    Color shade(const Scene &scene, std::shared_ptr<Shape> const &sharedPtr, const Ray &ray, const Hitpoint& hitpoint);
     Color calc_diffuse(const Scene &s, std::shared_ptr<Shape> const &sharedPtr, const Hitpoint &hitpoint);
     Color tonemap(const Color &clr);
     Color calc_ambient(const Scene &s, std::shared_ptr<Shape> const &sharedPtr, const Hitpoint &hitpoint);

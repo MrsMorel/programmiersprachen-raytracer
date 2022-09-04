@@ -15,6 +15,7 @@
 #include <glm/vec3.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/gtx/intersect.hpp>
+#include "epsilon.hpp"
 
 class Shape {
 public:

@@ -102,7 +102,7 @@ Scene sdfParser(std::string const& file_path){
                 iss >> up_x >> up_y >> up_z;
                 Camera cam{cam_name, fov_x, {dir_x, dir_y, dir_z}, {up_x, up_y, up_z}};
                 std::cout << "successfully created camera " << cam_name <<std::endl;
-                std::cout << "fov_x: " << fov_x << "\n";
+                std::cout << "fov_x: " << cam.get_fov_x() << "\n";
                 std::cout << "eye, x: " << cam.get_eye().x << "   y: " << cam.get_eye().y << "  z: " << cam.get_eye().z << "\n";
                 std::cout << "direction, x: " << cam.get_direction().x << "   y: " << cam.get_direction().y << "  z: " << cam.get_direction().z << "\n";
                 std::cout << "up, x: " << cam.get_up().x << "   y: " << cam.get_up().y << "  z: " << cam.get_up().z << "\n";
@@ -121,6 +121,10 @@ Scene sdfParser(std::string const& file_path){
             sc.rend.width = x_res;
             sc.rend.height = y_res;
             std::cout << "successfully created render "<< sc.rend.camera_name << std::endl;
+            std::cout << "Filename: " << sc.rend.filename << "\n";
+            std::cout << "width: " << sc.rend.width << "\n";
+            std::cout << "height: " << sc.rend.height << "\n";
+
             //erzeugt bild der szene und legt datei ab mit auflösung
         }
         if ("ambient" == keyword){ //ambiente Grundbeleuchtung

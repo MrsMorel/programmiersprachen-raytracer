@@ -92,7 +92,7 @@ Color Renderer::trace(const Ray &ray, const Scene &s) {
 }
 //TODO shade implementieren
 
-Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, const Ray &ray, Hitpoint hitpoint) {
+Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, const Ray &ray, const Hitpoint& hitpoint) {
     //point x = r(t) , t=distance into ray equation
     //evaluate illumination equation
     //generate new rays if reflection, refraction or shadows
@@ -105,7 +105,7 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
     Color ks_specular{0.0f,0.0f,0.0f};
     for (auto const &light: s.light_vector) {
         bool block = false; //normal muss in intersect an hitpoint gegeben werden!
-        auto light_hit = Ray{hitpoint.point + hitpoint.normal * 0.001f, glm::normalize(light->pos - hitpoint.point)};
+        auto light_hit = Ray{hitpoint.point + (hitpoint.normal * 0.0001f), glm::normalize(light->pos - hitpoint.point)};
         //light origin negativ?
         //auto i = light_hit.direction;
         //auto r = i - 2 * glm::dot(i, hitpoint.normal) * hitpoint.normal;
@@ -120,12 +120,14 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
         }
         if (!block){
             //auto l = light->color * light->brightness;
-            float dot_l_n = std::max(glm::dot(hitpoint.normal, light_hit.direction), 0.0f);
-            kd_diffuse += (light->color * light->brightness * sharedPtr->material()->kd * dot_l_n);
+            glm::vec3 n = hitpoint.normal;
+            glm::vec3 i = light_hit.direction;
+            float dot_n_i = glm::clamp(glm::dot(n, i), 0.0f, 1.0f);
+            kd_diffuse += (light->color * light->brightness * sharedPtr->material()->kd * dot_n_i);
             //ks_specular += l * sharedPtr->material()->ks * std::pow(r_dot_v, sharedPtr->material()->m_);
         }
     }
-    return ka_ambient + kd_diffuse + ks_specular;
+    return (ka_ambient + kd_diffuse + ks_specular);
 }
 
 
@@ -139,33 +141,6 @@ Color Renderer::calc_ambient(const Scene &s, const std::shared_ptr<Shape> &share
     Color calc_ambient = ka * s.ambient.color;
     return calc_ambient ;
 }
-/*
-Color Renderer::calc_diffuse( Scene const& scene, std::shared_ptr<Shape> const& shape,Hitpoint const& hit){
-    Color c_diffuse{0.0f, 0.0f, 0.0f};
-    Color sum;
-
-    for(const auto& light : scene.light_vector){
-        Hitpoint hit_light;
-        bool block = false;
-        Ray ray_of_light{hit.point + 0.1f * hit.normal, glm::normalize(light->pos - hit.point)};
-        for(const auto& element : scene.shape_vector){
-            hit_light = element->intersect(ray_of_light);
-            if(hit_light.cut){
-                block = true;
-            }
-        }
-        if(!block){
-            Color clr{light->color * light->brightness};
-            Color kd = shape->material()->kd;
-            float x = -(glm::dot(hit.normal, glm::normalize(light->pos - hit.point)));
-            x = std::max(x, 0.0f); //clamp
-            sum += (clr * kd) * x;
-        }
-    }
-    return c_diffuse;
-}*/
-
-
 
 
 
