@@ -138,20 +138,32 @@ Scene sdfParser(std::string const& file_path){
             std::cout << "color, r: " << sc.ambient.color.r << "   g: " << sc.ambient.color.g << "  b: " << sc.ambient.color.b << "\n";
         }
         if ("transform" == keyword) {
-            std::string shape_name;
-            iss >> shape_name;
+            std::string object_name;
+            iss >> object_name;
+            /*
+            if ("eye" != object_name) {
+                continue;
+            }
+            */
 
             auto it = sc.shape_vector.begin();
             if (sc.shape_vector.size() != 1)
             {
-                while ((*it)->name() != shape_name) {
+                while ((*it)->name() != object_name) {
                     ++it;
                 }
             }
-            std::shared_ptr<Shape> obj = *it;
 
+            std::shared_ptr<Shape> obj = *it;
             std::string transformation_type;
             iss >> transformation_type;
+
+            glm::mat4 translate_matrix;
+            glm::mat4 rotation_matrix;
+            glm::mat4 scale_matrix;
+            glm::mat4 help_mat;
+            glm::mat4 final_transformations;
+
             if ("translate" == transformation_type) {
                 float x;
                 float y;
@@ -160,7 +172,8 @@ Scene sdfParser(std::string const& file_path){
                 iss >> y;
                 iss >> z;
                 obj->translate(glm::vec3{ x,y,z });
-                std::cout << "translated " << shape_name << std::endl;
+                translate_matrix = glm::translate(help_mat, glm::vec3{ x,y,z });
+                std::cout << "translated " << object_name << std::endl;
             }
             if ("rotate" == transformation_type) {
                 float degree;
@@ -173,7 +186,8 @@ Scene sdfParser(std::string const& file_path){
                 iss >> y;
                 iss >> z;
                 obj->rotate(degree, glm::vec3{ x,y,z });
-                std::cout << "rotated " << shape_name << std::endl;
+                rotation_matrix = glm::rotate(degree, glm::vec3{ x,y,z });
+                std::cout << "rotated " << object_name << std::endl;
             }
             if ("scale" == transformation_type) {
                 float x;
@@ -183,8 +197,30 @@ Scene sdfParser(std::string const& file_path){
                 iss >> y;
                 iss >> z;
                 obj->scale(glm::vec3{ x,y,z });
-                std::cout << "scaled " << shape_name << std::endl;
+                scale_matrix = glm::scale(help_mat, glm::vec3{ x,y,z });
+                std::cout << "scaled " << object_name << std::endl;
             }
+
+            final_transformations = translate_matrix * rotation_matrix * scale_matrix;
+            obj->update_world_transformation(final_transformations);
+
+            /*
+            if (sc.camera.get_name() == object_name)
+            {
+                sc.camera.transformation_matrix()* final_transformations;
+                std::cout << "Camera transformed"<< std::endl;
+            }
+            else {
+                auto it = sc.shape_vector.begin();
+                if (sc.shape_vector.size() != 1) {
+                    while ((*it)->name() != object_name) {
+                        ++it;
+                    }
+                    std::shared_ptr<Shape> obj = *it;
+                    obj->update_world_transformation(final_transformations);
+                }
+            }
+            */
         }
     }
     sdf_filestream.close();
