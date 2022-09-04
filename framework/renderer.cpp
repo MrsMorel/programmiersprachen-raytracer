@@ -71,7 +71,10 @@ Color Renderer::trace(const Ray &ray, const Scene &s) {
     Hitpoint closest_t;
     closest_t.t = INFINITY;
     for (const auto& element : s.shape_vector) {
-        Hitpoint hit = element->intersect(ray);
+        Ray object_space_ray = transformRay(element->world_transformation(), ray);
+        Hitpoint hit = element->intersect(object_space_ray);
+        transformBack(hit, element->world_transformation());
+        //Hitpoint hit = element->intersect(ray);
         /*if (hit.cut){
             std::cout << "hit" << "\n";
         }*/
