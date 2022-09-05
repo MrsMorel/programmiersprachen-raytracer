@@ -45,9 +45,20 @@ std::ostream& operator<<(std::ostream& os , Shape const& s )
 {
     return s.print(os);
 }
-
+/*
 void Shape::translate(glm::vec3 const& point) {
     world_transformation_ = glm::translate(world_transformation_, point);
+    world_transformation_inv_ = glm::inverse(world_transformation_);
+}
+*/
+void Shape::translate(glm::vec3 const& point) {
+    glm::mat4 translation_matrix =
+    { 1.0f, 0.0f, 0.0f, point.x,
+    0.0f, 1.0f, 0.0f, point.y,
+    0.0f, 0.0f, 1.0f, point.z,
+    0.0f, 0.0f, 0.0f, 1.0f };
+
+    world_transformation_ = world_transformation_ * translation_matrix;
     world_transformation_inv_ = glm::inverse(world_transformation_);
 }
 
