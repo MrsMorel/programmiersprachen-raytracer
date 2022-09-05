@@ -37,14 +37,11 @@ std::ostream &Sphere::print(std::ostream &os) const {
 }
 
 Hitpoint Sphere::intersect(const Ray &ray) const {
-    Ray transformed_ray = transformRay(glm::inverse(world_transformation()), ray);
     float t = 0.0f;
-    bool cut = glm::intersectRaySphere(transformed_ray.origin, glm::normalize(ray.direction), center_, radius_ * radius_, t);
+    bool cut = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_ * radius_, t);
     glm::vec3 hitpoint = ray.origin + (t * ray.direction);
     glm::vec3 normal = glm::normalize(hitpoint - center_);
-    Hitpoint Hitpoint = { cut, t, name(), material(), ray.direction, hitpoint, normal };
-    transformBack(Hitpoint, world_transformation());
-    return Hitpoint;
+    return Hitpoint{ cut, t, name(), material(), ray.direction, hitpoint, normal };
 }
 
 Sphere::~Sphere() {
