@@ -59,12 +59,12 @@ struct Color
         b *= other.b;
         return *this;
     }
-    Color& operator*(Color const& other)
+    Color operator*(Color const& other)
     {
-        r *= other.r;
-        g *= other.g;
-        b *= other.b;
-        return *this;
+        float rn = r * other.r;
+        float gn = g * other.g;
+        float bn = b * other.b;
+        return Color{rn,gn,bn};
     }
 
 
@@ -75,12 +75,12 @@ struct Color
         b *= other;
         return *this;
     }
-    Color& operator*(float const& other)
+    Color operator*(float const& other)
     {
-        r *= other;
-        g *= other;
-        b *= other;
-        return *this;
+        float rn = r * other;
+        float rg = g * other;
+        float rb = b * other;
+        return Color{rn,rg,rb};
     }
 
 /*

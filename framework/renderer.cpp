@@ -58,6 +58,9 @@ void Renderer::render(const Scene &s) {
         for (unsigned x = 0; x < s.rend.width; ++x) {
             Pixel p{x,y};
             Ray ray = s.camera.c_ray(x , y , s.rend.width, s.rend.height);
+
+            //--
+
             p.color = tonemap(trace(ray, s));
             write(p);
         }
@@ -102,8 +105,9 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
 
     //ambient
     Color ka_ambient = calc_ambient(s, sharedPtr, hitpoint);
+
+    //return ka_ambient;
     // calc diffuse
-    //Color kd_diffuse = calc_diffuse(s, sharedPtr, hitpoint);
     Color kd_diffuse{0.0f,0.0f,0.0f};
     Color ks_specular{0.0f,0.0f,0.0f};
     for (auto const &light: s.light_vector) {
@@ -113,6 +117,7 @@ Color Renderer::shade(const Scene &s, std::shared_ptr<Shape> const& sharedPtr, c
         //auto i = light_hit.direction;
 
         //auto n = hitpoint.normal;
+
         for (auto const &sh: s.shape_vector) {
             if (sh->intersect(light_hit).cut) {
                 block = true;

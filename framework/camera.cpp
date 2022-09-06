@@ -40,9 +40,9 @@ glm::mat4 Camera::transformation_matrix() {
     glm::vec3 u = glm::normalize(glm::cross(direction, up));
     glm::vec3 v = glm::normalize(glm::cross(u, direction));
 
-    glm::mat4 mat{ u.x, v.x, -direction.x, eye_.x,
-        u.y, v.y, -direction.y, eye_.y,
-        u.z, v.z, -direction.z, eye_.z,
+    glm::mat4 mat{ u.x, v.x, direction.x, eye_.x,
+        u.y, v.y, direction.y, eye_.y,
+        u.z, v.z, direction.z, eye_.z,
         0.0f, 0.0f, 0.0f, 1.0f };
     return mat;
 }

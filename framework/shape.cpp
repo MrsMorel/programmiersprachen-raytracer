@@ -92,8 +92,8 @@ Ray transformRay(glm::mat4 const& mat, Ray const& ray) {
 
 //lokales Objektkoordinatensystem -> Weltkoordinatensystem
 void transformBack(Hitpoint& hitpoint, glm::mat4 const& mat) {
-    hitpoint.point = glm::vec3{ glm::vec4{ hitpoint.point,1.0f }*mat };
-    hitpoint.normal = glm::normalize(glm::vec3{ glm::vec4{ hitpoint.normal, 0.0f }*glm::transpose(glm::inverse(mat)) });
+    hitpoint.point = glm::vec3{ mat*glm::vec4{ hitpoint.point,1.0f } };
+    hitpoint.normal = glm::normalize(glm::vec3{glm::transpose(glm::inverse(mat)) * glm::vec4{ hitpoint.normal, 0.0f } });
 }
 
 glm::mat4 Shape::world_transformation() const {
